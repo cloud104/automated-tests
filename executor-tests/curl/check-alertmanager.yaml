@@ -1,0 +1,17 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: check-alertmanager
+  namespace: testkube
+  labels:
+    app: alertmanager
+spec:
+  type: curl/test
+  content:
+    type: git-file
+    repository:
+      type: git
+      uri: https://github.com/cloud104/automated-tests.git
+      branch: master
+      path: tests/alertmanager/alertmanager.json
+      authType: basic

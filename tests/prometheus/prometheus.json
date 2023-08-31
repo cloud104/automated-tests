@@ -1,0 +1,10 @@
+{
+	"command": [
+	  "curl",
+	  "http://prometheus-tks-prometheus.tks-system.svc.cluster.local:9090/-/healthy",
+	  "-H",
+	  "'Accept: application/json'"
+	],
+	"expected_status": "200",
+	"expected_body": "Prometheus Server is Healthy"
+  }
