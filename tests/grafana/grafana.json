@@ -1,0 +1,9 @@
+{
+	"command": [
+	  "curl",
+	  "https://grafana.tstsoares10.staging.k8s.us-east-1.aws.tks.sh/api/health",
+	  "-H",
+	  "'Accept: application/json'"
+	],
+	"expected_status": "200"
+  }
