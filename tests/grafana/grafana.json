@@ -74,15 +74,12 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"  pm.response.to.have.status(200);",
+							" pm.response.to.have.status(200);",
 							"});",
 							"",
 							"pm.test(\"Check status database\", function () {",
-							"",
-							" const responseJson =  pm.response.json();",
-							" const [databaseStatus] = responseJson.filter(function(obj){",
-							" pm.expect(obj.database).to.eql(\"ok\")",
-							" })",
+							" const responseJson = pm.response.json();",
+							" pm.expect(responseJson.database).to.eql(\"ok\")",
 							"})",
 							""
 						],
@@ -94,17 +91,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://grafana.tstsoares10.staging.k8s.us-east-1.aws.tks.sh/api/health",
-					"protocol": "https",
+					"raw": "http://kube-prometheus-stack-grafana.tks-system.svc.cluster.local/api/health",
+					"protocol": "http",
 					"host": [
-						"grafana",
-						"tstsoares10",
-						"staging",
-						"k8s",
-						"us-east-1",
-						"aws",
-						"tks",
-						"sh"
+						"kube-prometheus-stack-grafana",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
 					],
 					"path": [
 						"api",
