@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "Datasource",
 			"event": [
 				{
 					"listen": "test",
@@ -22,7 +22,7 @@
 							" const [firstDatasource] = responseJson.filter(function(obj){",
 							"   return obj.isDefault",
 							" })",
-							" pm.expect(firstDatasource.name).to.eql(pm.collectionVariables.get(\"DATASOURCE\"));",
+							" pm.expect(firstDatasource.name).to.eql(pm.environment.get(\"DATASOURCE\"));",
 							"});"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "Health",
 			"event": [
 				{
 					"listen": "test",
@@ -134,7 +134,7 @@
 	"variable": [
 		{
 			"key": "USER",
-			"value": "admin",
+			"value": "",
 			"type": "string"
 		},
 		{
