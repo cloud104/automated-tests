@@ -14,4 +14,4 @@ spec:
       uri: https://github.com/cloud104/automated-tests.git
       branch: new-test/grafana
       path: tests/grafana/grafana.json
-      authType: basics
+      authType: basic
