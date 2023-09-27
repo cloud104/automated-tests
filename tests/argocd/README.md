@@ -1,8 +1,4 @@
-# Name: check-grafana
-
-## TestKube Type: postman/collection
-
-## CRD: ../../executors/postman/crd-grafana.yaml
+# Name: check-argocd
 
 ## Verifications:
 
@@ -29,6 +25,10 @@
 - USER string
 - PASS string
 - DATASOURCE string
+
+
+## TestKube Type: postman/collection
+
 
 ## Create Test:
 

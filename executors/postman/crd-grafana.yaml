@@ -12,6 +12,6 @@ spec:
     repository:
       type: git
       uri: https://github.com/cloud104/automated-tests.git
-      branch: new-test/grafana
+      branch: master
       path: tests/grafana/grafana.json
       authType: basic
