@@ -1,0 +1,17 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: check-grafana
+  namespace: testkube
+  labels:
+    app: grafana
+spec:
+  type: postman/collection
+  content:
+    type: git-file
+    repository:
+      type: git
+      uri: https://github.com/cloud104/automated-tests.git
+      branch: master
+      path: tests/grafana/grafana.json
+      authType: basic
