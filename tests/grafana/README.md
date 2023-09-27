@@ -2,7 +2,9 @@
 
 ## TestKube Type: postman/collection
 
-## CRD: ../../executors/postman/crd-grafana.yaml
+### CRD: 
+
+- ../../executors/postman/crd-grafana.yaml
 
 ## Verifications:
 
