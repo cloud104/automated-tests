@@ -6,7 +6,7 @@ metadata:
   labels:
     app: grafana
 spec:
-  type: curl/test
+  type: postman/collection
   content:
     type: git-file
     repository:
@@ -14,4 +14,4 @@ spec:
       uri: https://github.com/cloud104/automated-tests.git
       branch: new-test/grafana
       path: tests/grafana/grafana.json
-      authType: basic
+      authType: basics

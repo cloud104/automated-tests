@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8e355698-877f-4d74-b959-3a065dda5db1",
-		"name": "New Collection",
+		"name": "Check-Grafana",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30057446"
 	},
@@ -13,18 +13,17 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
+							"pm.test(\"Response status code is 200\", function () {",
 							"  pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Check default datasource\", function () {",
+							"pm.test(\"Default datasource check\", function () {",
 							" const responseJson =  pm.response.json();",
 							" const [firstDatasource] = responseJson.filter(function(obj){",
 							"   return obj.isDefault",
 							" })",
-							" pm.expect(firstDatasource.name).to.eql(pm.environment.get(\"DATASOURCE\"))",
-							"})",
-							""
+							" pm.expect(firstDatasource.name).to.eql(pm.collectionVariables.get(\"DATASOURCE\"));",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -35,13 +34,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "password",
-							"value": "8%qxRSuJ5ELQq7a1",
+							"key": "username",
+							"value": "{{USER}}",
 							"type": "string"
 						},
 						{
-							"key": "username",
-							"value": "admin",
+							"key": "password",
+							"value": "{{PASS}}",
 							"type": "string"
 						}
 					]
@@ -74,20 +73,22 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							" pm.response.to.have.status(200);",
+							"  pm.response.to.have.status(200);",
 							"});",
 							"",
 							"pm.test(\"Check status database\", function () {",
 							" const responseJson = pm.response.json();",
 							" pm.expect(responseJson.database).to.eql(\"ok\")",
-							"})",
-							""
+							"})"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -124,6 +125,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
+					"",
 					""
 				]
 			}
@@ -132,7 +134,7 @@
 	"variable": [
 		{
 			"key": "USER",
-			"value": "",
+			"value": "admin",
 			"type": "string"
 		},
 		{
