@@ -14,17 +14,14 @@
  
 - Check if the default data source matches the value configured in the variable. ( Expected: "isDefault = True" )
  
-
 ## URL:
 
 - Service: http://kube-prometheus-stack-grafana.tks-system.svc.cluster.local
-
 
 ## Endpoints:
 
 - /api/datasources ( requires authentication)
 - /api/health ( does not require authentication )
-
 
 ## Variables:
 
@@ -37,7 +34,6 @@
 ```
 kubectl testkube create test --name check-grafana --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path tests/grafana/grafana.json
 ```
-
 ## Run Test:
 
 ```
