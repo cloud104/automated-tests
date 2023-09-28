@@ -4,8 +4,7 @@ metadata:
   name: check-argocd
   namespace: testkube
   labels:
-    executor: postman-executor
-    test-type: postman-collection
+    app: argocd
 spec:
   type: postman/collection
   content:
