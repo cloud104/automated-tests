@@ -1,10 +1,16 @@
 # Name: check-argocd
 
+## TestKube Type: postman/collection
+
+### CRD: 
+
+- ../../executors/postman/crd-argocd.yaml
+
 ## Verifications:
 
 - Verify login attempt using access credentials and get session token. ( Expected: "200" )
 
-- Check whether the configured repositories have a successful connection. ( Expected: "Connection: Successful" )
+- Check if the configured repositories have a successful connection. ( Expected: "Connection: Successful" )
  
 ## URL:
 
@@ -19,8 +25,6 @@
 
 - USER string
 - PASS string
-
-## TestKube Type: postman/collection
 
 ## Create Test:
 
