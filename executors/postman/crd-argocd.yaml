@@ -1,0 +1,18 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: check-argocd
+  namespace: testkube
+  labels:
+    executor: postman-executor
+    test-type: postman-collection
+spec:
+  type: postman/collection
+  content:
+    type: git-file
+    repository:
+      type: git
+      uri: https://github.com/cloud104/automated-tests.git
+      branch: master
+      path: tests/argocd/argocd.json
+      authType: basic
