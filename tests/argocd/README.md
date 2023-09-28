@@ -12,8 +12,8 @@
 
 ## Endpoints:
 
-/api/v1/session (requires authentication)
-/api/v1/repositories (requires authentication)
+- /api/v1/session (requires authentication)
+- /api/v1/repositories (requires authentication)
 
 ## Variables:
 
