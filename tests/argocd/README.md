@@ -1,5 +1,11 @@
 # Name: check-argocd
 
+## TestKube Type: postman/collection
+
+### CRD: 
+
+- ../../executors/postman/crd-argocd.yaml
+
 ## Verifications:
 
 - Verify login attempt using access credentials and get session token. ( Expected: "200" )
@@ -19,8 +25,6 @@
 
 - USER string
 - PASS string
-
-## TestKube Type: postman/collection
 
 ## Create Test:
 

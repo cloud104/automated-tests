@@ -1,5 +1,11 @@
 # Name: check-prometheus
 
+## TestKube Type: curl/test
+
+### CRD: 
+
+- ../../executors/curl/crd-prometheus.yaml
+
 ## Verifications:
 
 - Checks if the health endpoint is as expected. (Expected: "Prometheus Server is Healthy")
@@ -11,8 +17,6 @@
 ## Endpoints:
 
 - /-/healthy (not requires authentication)
-
-## TestKube Type: curl/test
 
 ## Create Test:
 

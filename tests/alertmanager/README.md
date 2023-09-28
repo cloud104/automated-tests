@@ -1,5 +1,11 @@
 # Name: check-alertmanager
 
+## TestKube Type: curl/test
+
+### CRD: 
+
+- ../../executors/curl/crd-alertmanager.yaml
+
 ## Verifications:
 
 - Checks if the health endpoint is as expected. (Expected: "OK")
@@ -11,8 +17,6 @@
 ## Endpoints:
 
 - /-/healthy (not requires authentication)
-
-## TestKube Type: curl/test
 
 ## Create Test:
 
