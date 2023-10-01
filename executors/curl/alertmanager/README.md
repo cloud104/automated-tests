@@ -2,10 +2,6 @@
 
 ## TestKube Type: curl/test
 
-### CRD: 
-
-- ../../executors/curl/crd-alertmanager.yaml
-
 ## Verifications:
 
 - Checks if the health endpoint is as expected. (Expected: "OK")
@@ -21,7 +17,7 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-alertmanager --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path tests/alertmanager/alertmanager.json
+kubectl testkube create test --name check-alertmanager --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/alertmanager/alertmanager.json
 ```
 ## Run Test:
 

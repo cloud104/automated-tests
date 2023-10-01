@@ -2,10 +2,6 @@
 
 ## TestKube Type: postman/collection
 
-### CRD: 
-
-- ../../executors/postman/crd-grafana.yaml
-
 ## Verifications:
 
 - Verify login attempt using access credentials. ( Expected: "200" )
@@ -32,7 +28,7 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-grafana --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path tests/grafana/grafana.json
+kubectl testkube create test --name check-grafana --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/grafana/grafana.json
 ```
 ## Run Test:
 

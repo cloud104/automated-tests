@@ -1,17 +1,17 @@
 apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
-  name: check-prometheus
+  name: check-grafana
   namespace: testkube
   labels:
-    app: prometheus
+    app: grafana
 spec:
-  type: curl/test
+  type: postman/collection
   content:
     type: git-file
     repository:
       type: git
       uri: https://github.com/cloud104/automated-tests.git
       branch: master
-      path: tests/prometheus/prometheus.json
+      path: executors/postman/grafana/grafana.json
       authType: basic

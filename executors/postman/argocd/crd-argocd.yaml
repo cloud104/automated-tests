@@ -13,5 +13,5 @@ spec:
       type: git
       uri: https://github.com/cloud104/automated-tests.git
       branch: master
-      path: tests/argocd/argocd.json
+      path: executors/postman/argocd/argocd.json
       authType: basic

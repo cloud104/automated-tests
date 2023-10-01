@@ -2,10 +2,6 @@
 
 ## TestKube Type: postman/collection
 
-### CRD: 
-
-- ../../executors/postman/crd-argocd.yaml
-
 ## Verifications:
 
 - Verify login attempt using access credentials and get session token. ( Expected: "200" )
@@ -29,7 +25,7 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-argocd --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path tests/argocd/argocd.json
+kubectl testkube create test --name check-argocd --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/argocd/argocd.json
 ```
 ## Run Test:
 
