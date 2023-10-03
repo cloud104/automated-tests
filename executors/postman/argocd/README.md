@@ -31,7 +31,7 @@ kubectl testkube create test --name check-argocd --type postman/collection --tes
 ### Or
 
 ```
-kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/postman/argocd/argocd.yaml
+kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/argocd/argocd.yaml
 ```
 
 ## Run Test:
