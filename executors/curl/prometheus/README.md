@@ -23,7 +23,7 @@ kubectl testkube create test --name check-prometheus --type curl/test --test-con
 ### Or
 
 ```
-kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/curl/prometheus/prometheus.yaml
+kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/curl/prometheus/prometheus.yaml
 ```
 
 ## Run Test:
