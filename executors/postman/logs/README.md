@@ -30,6 +30,7 @@
 ```
 kubectl testkube create test --name check-stack-logs --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/logs/logs.json
 ```
+
 ### Or
 
 ```

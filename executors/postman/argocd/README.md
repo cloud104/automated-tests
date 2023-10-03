@@ -27,6 +27,13 @@
 ```
 kubectl testkube create test --name check-argocd --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/argocd/argocd.json
 ```
+
+### Or
+
+```
+kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/postman/argocd/argocd.yaml
+```
+
 ## Run Test:
 
 ```

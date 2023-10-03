@@ -12,6 +12,6 @@ spec:
     repository:
       type: git
       uri: https://github.com/cloud104/automated-tests.git
-      branch: new-test/logs
+      branch: master
       path: executors/postman/logs/logs.json
       authType: basic
