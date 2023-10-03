@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "96774369-99b9-43b0-afaa-ed47d2af165c",
-		"name": "Check-Stack-Logs",
+		"name": "Check-Logs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30057446"
 	},
@@ -27,6 +27,9 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -46,7 +49,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "-k https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health",
+					"raw": "https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health",
 					"protocol": "https",
 					"host": [
 						"tks-logs-es-http",
@@ -58,8 +61,7 @@
 					"port": "9200",
 					"path": [
 						"_cluster",
-						"health",
-						""
+						"health"
 					]
 				}
 			},
