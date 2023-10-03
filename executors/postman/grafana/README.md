@@ -34,7 +34,7 @@ kubectl testkube create test --name check-grafana --type postman/collection --te
 ### Or
 
 ```
-kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/postman/grafana/grafana.yaml
+kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/grafana/grafana.yaml
 ```
 
 ## Run Test:
