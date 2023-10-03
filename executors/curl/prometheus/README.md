@@ -19,6 +19,13 @@
 ```
 kubectl testkube create test --name check-prometheus --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/prometheus/prometheus.json
 ```
+
+### Or
+
+```
+kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/curl/prometheus/prometheus.yaml
+```
+
 ## Run Test:
 
 ```
