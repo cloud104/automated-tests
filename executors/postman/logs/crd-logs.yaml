@@ -1,0 +1,17 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: check-stack-logs
+  namespace: testkube
+  labels:
+    app: logs
+spec:
+  type: postman/collection
+  content:
+    type: git-file
+    repository:
+      type: git
+      uri: https://github.com/cloud104/automated-tests.git
+      branch: new-test/logs
+      path: executors/postman/logs/logs.json
+      authType: basic

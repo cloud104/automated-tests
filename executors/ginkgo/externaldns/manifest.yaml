@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    check1: externaldns
+    check2: nginx-ingress
+  name: deployment-check
+  namespace: testkube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      check1: externaldns
+      check2: nginx-ingress
+  template:
+    metadata:
+      labels:
+        check1: externaldns
+        check2: nginx-ingress
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    check1: externaldns
+    check2: nginx-ingress
+  name: deployment-check-ClusterIP
+  namespace: testkube
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    check1: externaldns
+    check2: nginx-ingress
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: deployment-check-ingress
+  namespace: testkube
+spec:
+  rules:
+  - host: check-ingress.tstsoares10.staging.k8s.us-east-1.aws.tks.sh
+    http:
+      paths:
+      - backend:
+          service:
+            name: deployment-check-ClusterIP
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
