@@ -23,7 +23,7 @@ kubectl testkube create test --name check-alertmanager --type curl/test --test-c
 ### Or
 
 ```
-kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/curl/alertmanager/alertmanager.yaml
+kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/curl/alertmanager/alertmanager.yaml
 ```
 
 ## Run Test:
