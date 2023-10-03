@@ -34,7 +34,7 @@ kubectl testkube create test --name check-stack-logs --type postman/collection -
 ### Or
 
 ```
-kubectl create -f https://github.com/cloud104/automated-tests/blob/master/executors/postman/logs/logs.yaml
+kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/logs/logs.yaml
 ```
 
 ## Run Test:
