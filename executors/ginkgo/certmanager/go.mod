@@ -1,6 +1,6 @@
 module github.com/cloud104/automated-tests/executors/ginkgo/certmanager
 
-go 1.20
+go 1.19
 
 require (
 	github.com/hashicorp/go-multierror v1.1.1
