@@ -5,11 +5,10 @@ import (
 	"os"
 	"path"
 
-	"github.com/totvs-cloud/go-manifest"
-
 	"github.com/hashicorp/go-multierror"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	"github.com/totvs-cloud/go-manifest"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 )
