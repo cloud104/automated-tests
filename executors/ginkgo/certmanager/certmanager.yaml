@@ -2,7 +2,7 @@ apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
   name: check-certmanager
-  namespace: testkube
+  namespace: tks-system
   labels:
     app: certmanager
 spec:
