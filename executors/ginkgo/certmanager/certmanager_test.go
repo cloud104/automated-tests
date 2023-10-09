@@ -2,13 +2,15 @@ package certmanager_test
 
 import (
 	"context"
+	"os"
+	"path"
 
 	"github.com/hashicorp/go-multierror"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/totvs-cloud/go-manifest"
-	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
+	"k8s.io/client-go/tools/clientcmd"
 )
 
 var manifests *manifest.Reader
@@ -57,45 +59,22 @@ func loadRestConfig() (*rest.Config, error) {
 
 	// Attempt to retrieve the Kubernetes cluster configuration first from the in-cluster environment
 	config, err1 := rest.InClusterConfig()
-	if err1 != nil {
-		panic(err.Error())
-	}
-
-	replaceTransport(config, reqClient.GetTransport())
-
-	// Create kubernetes client with config.
-	clientset, err := kubernetes.NewForConfig(config)
-	if err != nil {
-		panic(err.Error())
+	if err1 == nil {
+		return config, nil
 	}
 
 	result = multierror.Append(result, err1)
 
 	// If that doesn't work, try getting it locally using the kubeconfig file in your home directory
-	//	homeDir, err2 := os.UserHomeDir()
-	//	if err2 != nil {
-	//		return nil, multierror.Append(result, err2)
-	//	}
-	//
-	//	config, err3 := clientcmd.BuildConfigFromFlags("", path.Join(homeDir, "/.kube/config"))
-	//	if err3 != nil {
-	//		return nil, multierror.Append(result, err3)
-	//	}
-
-	return clientset, nil
-}
-
-func replaceTransport(config *rest.Config, t *req.Transport) {
-	// Extract tls.Config from rest.Config
-	tlsConfig, err := rest.TLSConfigFor(config)
-	if err != nil {
-		panic(err.Error())
+	homeDir, err2 := os.UserHomeDir()
+	if err2 != nil {
+		return nil, multierror.Append(result, err2)
 	}
-	// Set TLSClientConfig to req's Transport.
-	t.TLSClientConfig = tlsConfig
-	// Override with req's Transport.
-	config.Transport = t
-	// rest.Config.TLSClientConfig should be empty if
-	// custom Transport been set.
-	config.TLSClientConfig = rest.TLSClientConfig{}
+
+	config, err3 := clientcmd.BuildConfigFromFlags("", path.Join(homeDir, "/.kube/config"))
+	if err3 != nil {
+		return nil, multierror.Append(result, err3)
+	}
+
+	return config, nil
 }
