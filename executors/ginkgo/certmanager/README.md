@@ -4,7 +4,7 @@
 
 ## Verifications:
 
-- The check validates that you can create a certificate using your CRD via a yaml manifest on a kubernetes cluster.
+- The check validates if  you can create a certificate using your CRD a yaml manifest on a kubernetes cluster.
 
 ## Variables: ( on Manifest )
 
@@ -15,12 +15,6 @@
 
 ```
 kubectl testkube create test --name check-certmanager --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/ginkgo/certmanager/certmanager.yaml
 ```
 
 ## Run Test:

@@ -1,11 +1,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: example-cert-test
+  name: certificate-test
   namespace: tks-system
 spec:
-  # Secret names are always required.
-  #secretName: example-com-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   subject:
