@@ -31,13 +31,13 @@ var _ = BeforeSuite(func() {
 	manifests = mr
 })
 
-//var _ = AfterSuite(func() {
-//	m, err := manifests.FromPath("./certificate.yaml", false)
-//	Expect(err).NotTo(HaveOccurred())
-//
-//	err = m.Delete(context.Background())
-//	Expect(err).NotTo(HaveOccurred())
-//})
+var _ = AfterSuite(func() {
+	m, err := manifests.FromPath("./certificate.yaml", false)
+	Expect(err).NotTo(HaveOccurred())
+
+	err = m.Delete(context.Background())
+	Expect(err).NotTo(HaveOccurred())
+})
 
 var _ = Describe("Certmanager Test", func() {
 	It("should return success apply", func() {
