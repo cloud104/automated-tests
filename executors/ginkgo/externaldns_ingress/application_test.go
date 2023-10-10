@@ -34,12 +34,12 @@ var _ = BeforeSuite(func() {
 	manifests = mr
 })
 
-//	var _ = AfterSuite(func() {
-//		m, err := manifests.FromPath("./resources.yaml", false)
-//		Expect(err).NotTo(HaveOccurred())
-//		err = m.Delete(context.Background())
-//		Expect(err).NotTo(HaveOccurred())
-//	})
+var _ = AfterSuite(func() {
+	m, err := manifests.FromPath("./resources.yaml", false)
+	Expect(err).NotTo(HaveOccurred())
+	err = m.Delete(context.Background())
+	Expect(err).NotTo(HaveOccurred())
+})
 
 var _ = Describe("Application Test", func() {
 
@@ -67,42 +67,17 @@ var _ = Describe("Application Test", func() {
 		GinkgoWriter.Println("Manifest applied successfully!")
 	})
 
-	//	It("should return success create resources via manisfest yaml", func() {
-	//
-	//		sed("CLUSTERID", cluster_id, "./resources.yaml")
-	//		sed("REGIONDNS", region_dns, "./resources.yaml")
-	//
-	//		config, err := loadRestConfig()
-	//		Expect(err).NotTo(HaveOccurred())
-	//
-	//		// Instantiate a new ManifestReader by specifying the field manager and the Kubernetes cluster configuration
-	//		mr, err := manifest.NewReader("totvs-cloud", config)
-	//		Expect(err).NotTo(HaveOccurred())
-	//
-	//		// Create a new Manifest object
-	//		m, err := mr.FromPath("./resources.yaml", false)
-	//		Expect(err).NotTo(HaveOccurred())
-	//
-	//		// Apply the manifest using Server-Side Apply
-	//		err = m.Apply(context.Background())
-	//		Expect(err).NotTo(HaveOccurred())
-	//
-	//		time.Sleep(60 * time.Second)
-	//
-	//		GinkgoWriter.Println("Manifest applied successfully!")
-	//	})
-
-	It("should return 200 of Ingress", func() {
+	It("should return status code 200 when request Ingress", func() {
 
 		baseUrl, err := url.Parse("https://check-ingress." + cluster_id + "." + region_dns)
 		Expect(err).NotTo(HaveOccurred())
 
 		resp, requestErr := http.Get(baseUrl.String())
 
-		GinkgoWriter.Println(baseUrl)
-
 		Expect(requestErr).To(BeNil())
 		Expect(resp.StatusCode).To(Equal(200))
+
+		GinkgoWriter.Println(baseUrl)
 	})
 })
 

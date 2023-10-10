@@ -1,4 +1,4 @@
-# Name: ExternalDns-Ingress
+# Name: Externaldns-Ingress
 
 ## TestKube Type: Golang/Ginkgo
 
