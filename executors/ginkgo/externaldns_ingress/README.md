@@ -5,7 +5,7 @@
 ## Verifications:
 
 - Check if it is possible to create resources via yaml manifest (Deployment, service and ingress (nginx web server)).
-- Expect status code 200 return from get request for the created ingress.
+- Expect status code 200 return from request for the created ingress.
 
 ## Variables:
 
