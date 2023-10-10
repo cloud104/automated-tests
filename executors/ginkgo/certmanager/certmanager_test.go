@@ -26,7 +26,7 @@ var _ = BeforeSuite(func() {
 })
 
 var _ = AfterSuite(func() {
-	m, err := manifests.FromPath("./certificate-test.yaml", false)
+	m, err := manifests.FromPath("./certificate.yaml", false)
 	Expect(err).NotTo(HaveOccurred())
 
 	err = m.Delete(context.Background())
@@ -43,7 +43,7 @@ var _ = Describe("Certmanager Test", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		// Create a new Manifest object
-		m, err := mr.FromPath("./certificate-test.yaml", false)
+		m, err := mr.FromPath("./certificate.yaml", false)
 		Expect(err).NotTo(HaveOccurred())
 
 		// Apply the manifest using Server-Side Apply
