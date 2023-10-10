@@ -40,6 +40,7 @@ var _ = BeforeSuite(func() {
 //		err = m.Delete(context.Background())
 //		Expect(err).NotTo(HaveOccurred())
 //	})
+
 var _ = Describe("Application Test", func() {
 
 	It("should return success create resources via manisfest yaml", func() {
@@ -62,7 +63,7 @@ var _ = Describe("Application Test", func() {
 		err = m.Apply(context.Background())
 		Expect(err).NotTo(HaveOccurred())
 
-		time.Sleep(20 * time.Second)
+		time.Sleep(30 * time.Second)
 
 		GinkgoWriter.Println("Manifest applied successfully!")
 	})
@@ -73,6 +74,8 @@ var _ = Describe("Application Test", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		resp, requestErr := http.Get(baseUrl.String())
+
+		GinkgoWriter.Println(baseUrl)
 
 		Expect(requestErr).To(BeNil())
 		Expect(resp.StatusCode).To(Equal(200))
