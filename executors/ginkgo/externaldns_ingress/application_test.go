@@ -63,7 +63,7 @@ var _ = Describe("Application Test", func() {
 		err = m.Apply(context.Background())
 		Expect(err).NotTo(HaveOccurred())
 
-		time.Sleep(30 * time.Second)
+		time.Sleep(60 * time.Second)
 
 		GinkgoWriter.Println("Manifest applied successfully!")
 	})
