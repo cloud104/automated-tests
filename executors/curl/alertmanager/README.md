@@ -1,4 +1,4 @@
-# Name: check-alertmanager
+# Name: alertmanager
 
 ## TestKube Type: curl/test
 
@@ -17,17 +17,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-alertmanager --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/alertmanager/alertmanager.json
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/curl/alertmanager/alertmanager.yaml
+kubectl testkube create test --name alertmanager --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/alertmanager/alertmanager.json
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test check-alertmanager
+kubectl testkube run test alertmanager
 ```

@@ -1,4 +1,4 @@
-# Name: check-argocd
+# Name: argocd
 
 ## TestKube Type: postman/collection
 
@@ -25,17 +25,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-argocd --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/argocd/argocd.json
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/argocd/argocd.yaml
+kubectl testkube create test --name argocd --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/argocd/argocd.json
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test check-argocd --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD
+kubectl testkube run test argocd --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD
 ```

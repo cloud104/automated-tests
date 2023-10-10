@@ -1,4 +1,4 @@
-# Name: Certmanager-Check
+# Name: Certmanager
 
 ## TestKube Type: Golang/Ginkgo
 

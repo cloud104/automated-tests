@@ -1,4 +1,4 @@
-# Name: check-prometheus
+# Name: prometheus
 
 ## TestKube Type: curl/test
 
@@ -17,17 +17,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-prometheus --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/prometheus/prometheus.json
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/curl/prometheus/prometheus.yaml
+kubectl testkube create test --name prometheus --type curl/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/curl/prometheus/prometheus.json
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test check-prometheus
+kubectl testkube run test prometheus
 ```
