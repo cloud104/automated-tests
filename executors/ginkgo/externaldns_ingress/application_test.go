@@ -34,13 +34,12 @@ var _ = BeforeSuite(func() {
 	manifests = mr
 })
 
-var _ = AfterSuite(func() {
-	m, err := manifests.FromPath("./resources.yaml", false)
-	Expect(err).NotTo(HaveOccurred())
-	err = m.Delete(context.Background())
-	Expect(err).NotTo(HaveOccurred())
-})
-
+//	var _ = AfterSuite(func() {
+//		m, err := manifests.FromPath("./resources.yaml", false)
+//		Expect(err).NotTo(HaveOccurred())
+//		err = m.Delete(context.Background())
+//		Expect(err).NotTo(HaveOccurred())
+//	})
 var _ = Describe("Application Test", func() {
 
 	It("should return success create resources via manisfest yaml", func() {
