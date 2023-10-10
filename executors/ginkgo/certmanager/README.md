@@ -4,7 +4,7 @@
 
 ## Verifications:
 
-- The check validates if  you can create a certificate using your CRD a yaml manifest on a kubernetes cluster.
+- The check validates if  you can create a certificate using your CRD a yaml manifest.
 
 ## Variables:
 
