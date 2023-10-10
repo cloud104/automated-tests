@@ -6,10 +6,10 @@
 
 - The check validates if  you can create a certificate using your CRD a yaml manifest on a kubernetes cluster.
 
-## Variables: ( on Manifest )
+## Variables:
 
-- CLUSTERID string
-- REGIONDNS string
+- CLUSTER_ID string
+- REGION_DNS string
 
 ## Create Test:
 
@@ -20,5 +20,5 @@ kubectl testkube create test --name certmanager-check --type ginkgo/test --test-
 ## Run Test:
 
 ```
-kubectl testkube run test certmanager-check --secret-variable REGIONDNS=$region_dns --secret-variable CLUSTERID=$clusterid
+kubectl testkube run test certmanager-check --secret-variable REGION_DNS=$region_dns --secret-variable CLUSTER_ID=$clusterid
 ```

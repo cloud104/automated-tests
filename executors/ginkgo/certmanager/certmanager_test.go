@@ -2,8 +2,10 @@ package certmanager_test
 
 import (
 	"context"
+	"io/ioutil"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/hashicorp/go-multierror"
 	. "github.com/onsi/ginkgo/v2"
@@ -13,7 +15,11 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-var manifests *manifest.Reader
+var (
+	manifests  *manifest.Reader
+	cluster_id = os.Getenv("CLUSTER_ID")
+	region_dns = os.Getenv("REGION_DNS")
+)
 
 var _ = BeforeSuite(func() {
 	config, err := loadRestConfig()
@@ -35,6 +41,10 @@ var _ = AfterSuite(func() {
 
 var _ = Describe("Certmanager Test", func() {
 	It("should return success apply", func() {
+
+		sed("CLUSTERID", cluster_id, "./certificate.yaml")
+		sed("REGIONDNS", region_dns, "./certificate.yaml")
+
 		config, err := loadRestConfig()
 		Expect(err).NotTo(HaveOccurred())
 
@@ -77,4 +87,22 @@ func loadRestConfig() (*rest.Config, error) {
 	}
 
 	return config, nil
+}
+
+func sed(old, new, filePath string) error {
+	fileData, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		return err
+	}
+
+	fileString := string(fileData)
+	fileString = strings.ReplaceAll(fileString, old, new)
+	fileData = []byte(fileString)
+
+	err = ioutil.WriteFile(filePath, fileData, 0o600)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

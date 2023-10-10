@@ -20,9 +20,9 @@ spec:
     - server auth
     - client auth
   # At least one of a DNS Name, URI, or IP address is required.
-  commonName: '*.tstsoares10.staging.k8s.us-east-1.aws.tks.sh'
+  commonName: '*.CLUSTERID.REGIONDNS'
   dnsNames:
-    - '*.tstsoares10.staging.k8s.us-east-1.aws.tks.sh'
+    - '*.CLUSTERID.REGIONDNS'
   # Issuer references are always required.
   issuerRef:
     name: letsencrypt-dns-issuer
