@@ -30,13 +30,13 @@ var _ = BeforeSuite(func() {
 
 	mr, err := manifest.NewReader("totvs-cloud", config)
 	Expect(err).NotTo(HaveOccurred())
-
 	manifests = mr
 })
 
 var _ = AfterSuite(func() {
 	m, err := manifests.FromPath("./resources.yaml", false)
 	Expect(err).NotTo(HaveOccurred())
+
 	err = m.Delete(context.Background())
 	Expect(err).NotTo(HaveOccurred())
 })
