@@ -14,11 +14,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name certmanager-check --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
+kubectl testkube create test --name certmanager --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test certmanager-check --secret-variable REGION_DNS=$region_dns --secret-variable CLUSTER_ID=$clusterid
+kubectl testkube run test certmanager --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS 
 ```
