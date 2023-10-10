@@ -1,4 +1,4 @@
-# Name: Check-Stack-Logs
+# Name: Stack-Logs
 
 ## TestKube Type: postman/collection
 
@@ -28,17 +28,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-stack-logs --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/logs/logs.json
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/logs/logs.yaml
+kubectl testkube create test --name stack-logs --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/logs/logs.json
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test check-stack-logs --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD 
+kubectl testkube run test stack-logs --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD 
 ```

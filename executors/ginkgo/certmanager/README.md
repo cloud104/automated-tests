@@ -1,0 +1,24 @@
+# Name: Cert-manager
+
+## TestKube Type: Golang/Ginkgo
+
+## Verifications:
+
+- The check validates if you can create a certificate using your CRD through yaml manifest.
+
+## Variables:
+
+- CLUSTER_ID string
+- REGION_DNS string
+
+## Create Test:
+
+```
+kubectl testkube create test --name cert-manager --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
+```
+
+## Run Test:
+
+```
+kubectl testkube run test cert-manager --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS 
+```

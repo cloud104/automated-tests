@@ -1,4 +1,4 @@
-# Name: check-grafana
+# Name: grafana
 
 ## TestKube Type: postman/collection
 
@@ -28,17 +28,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name check-grafana --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/grafana/grafana.json
-```
-
-### Or
-
-```
-kubectl create -f https://raw.githubusercontent.com/cloud104/automated-tests/master/executors/postman/grafana/grafana.yaml
+kubectl testkube create test --name grafana --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/grafana/grafana.json
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test check-grafana --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD --secret-variable DATASOURCE=$DATA
+kubectl testkube run test grafana --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD --secret-variable DATASOURCE=$DATA
 ```
