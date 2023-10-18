@@ -30,5 +30,5 @@ kubectl testkube create test --name argocd --type postman/collection --test-cont
 ## Run Test:
 
 ```
-kubectl testkube run test argocd --secret-variable USER="" --secret-variable PASS=""
+kubectl testkube run test argocd -s USER="" -s PASS=""
 ```
