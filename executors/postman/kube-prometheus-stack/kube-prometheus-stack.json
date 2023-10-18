@@ -37,13 +37,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "username",
-									"value": "{{USER}}",
+									"key": "password",
+									"value": "{{GRAFANA_PASS}}",
 									"type": "string"
 								},
 								{
-									"key": "password",
-									"value": "{{PASS}}",
+									"key": "username",
+									"value": "{{GRAFANA_USER}}",
 									"type": "string"
 								}
 							]
