@@ -1,4 +1,4 @@
-# Name: grafana
+# Name: kube-prometheus-stack
 
 ## TestKube Type: postman/collection
 
