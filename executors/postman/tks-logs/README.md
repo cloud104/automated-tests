@@ -31,5 +31,5 @@ kubectl testkube create test --name tks-logs --type postman/collection --test-co
 ## Run Test:
 
 ```
-kubectl testkube run test tks-logs --secret-variable USER="" --secret-variable PASS="" 
+kubectl testkube run test tks-logs -s USER="" -s PASS="" 
 ```
