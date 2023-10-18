@@ -27,6 +27,7 @@
 - Query the Prometheus API using the Node-exporter target to check if a metric is valid.
 
 
+
 ### Endpoints:
 
 Grafana:
@@ -60,5 +61,5 @@ kubectl testkube create test --name kube-prometheus-stack --type postman/collect
 ## Run Test:
 
 ```
-kubectl testkube run test grafana -s GRAFANA_USER="" -s GRAFANA_PASS="" -v GRAFANA_DATASOURCE=""
+kubectl testkube run test kube-prometheus-stack -s GRAFANA_USER="" -s GRAFANA_PASS="" -v GRAFANA_DATASOURCE=""
 ```
