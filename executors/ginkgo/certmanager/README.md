@@ -1,4 +1,4 @@
-# Name: Cert-manager
+# Name: Certmanager
 
 ## TestKube Type: Golang/Ginkgo
 
@@ -14,11 +14,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name cert-manager --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
+kubectl testkube create test --name certmanager --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/certmanager
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test cert-manager --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS 
+kubectl testkube run test certmanager --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS 
 ```
