@@ -9,8 +9,8 @@
 
 ## Variables:
 
-- CLUSTER_ID string
-- REGION_DNS string
+- CLUSTER_ID (--variable)
+- REGION_DNS (--variable)
 
 ## Create Test:
 
@@ -21,5 +21,5 @@ kubectl testkube create test --name externaldns-ingress --type ginkgo/test --tes
 ## Run Test:
 
 ```
-kubectl testkube run test externaldns-ingress --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS
+kubectl testkube run test externaldns-ingress -v CLUSTER_ID="" -v REGION_DNS=""
 ```
