@@ -8,8 +8,8 @@
 
 ## Variables:
 
-- CLUSTER_ID string
-- REGION_DNS string
+- CLUSTER_ID (--variable)
+- REGION_DNS (--variable)
 
 ## Create Test:
 
@@ -20,5 +20,5 @@ kubectl testkube create test --name certmanager --type ginkgo/test --test-conten
 ## Run Test:
 
 ```
-kubectl testkube run test certmanager --secret-variable CLUSTER_ID=$CLUSTER_ID --secret-variable REGION_DNS=$REGION_DNS 
+kubectl testkube run test certmanager -v CLUSTER_ID="" -v REGION_DNS="" 
 ```
