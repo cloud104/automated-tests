@@ -13,8 +13,8 @@
 
 ## Endpoints:
 
-ElasticSearch: https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health/ (requires authentication)
-Kibana: http://tks-logs-kb-http.tks-logs.svc.cluster.local:5601/api/stats (requires authentication)
+- ElasticSearch: https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health/ (requires authentication)
+- Kibana: http://tks-logs-kb-http.tks-logs.svc.cluster.local:5601/api/stats (requires authentication)
 
 ## Variables:
 
