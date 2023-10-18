@@ -2,7 +2,6 @@
 
 ## TestKube Type: postman/collection
 
-
 ## Verifications:
 
 ### Grafana
@@ -27,8 +26,7 @@
 - Query the Prometheus API using the Node-exporter target to check if a metric is valid.
 
 
-
-### Endpoints:
+## Endpoints:
 
 Grafana:
 - http://kube-prometheus-stack-grafana.tks-system.svc.cluster.local/api/health 
