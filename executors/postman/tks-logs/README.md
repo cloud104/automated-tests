@@ -6,9 +6,9 @@
 
 - Verify login attempt using access credentials.
 
-- Elastic_cluster_status: Verify whether the cluster status returned by the api is as expected ( Expected: "green" )
+- Elastic_cluster_status: Check whether the cluster status returned by the api is as expected. ( Expected: "green" )
  
-- Kibana_status: Verify whether the cluster status returned by the api is as expected ( Expected: "green" )
+- Kibana_status: Check whether the cluster status returned by the api is as expected. ( Expected: "green" )
 
 
 ## Endpoints:
