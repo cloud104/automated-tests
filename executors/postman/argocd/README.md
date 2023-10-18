@@ -8,19 +8,18 @@
 
 - Check if the configured repositories have a successful connection. ( Expected: "Connection: Successful" )
  
-## URL:
-
-- Service: http://argo-cd-argocd-server.tks-system.svc.cluster.local
 
 ## Endpoints:
 
-- /api/v1/session (requires authentication)
-- /api/v1/repositories (requires authentication)
+- http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/session (requires authentication)
+- http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/repositories (requires authentication)
+
 
 ## Variables:
 
-- USER string
-- PASS string
+- USER (--secret-variable)
+- PASS (--secret-variable)
+
 
 ## Create Test:
 
@@ -31,5 +30,5 @@ kubectl testkube create test --name argocd --type postman/collection --test-cont
 ## Run Test:
 
 ```
-kubectl testkube run test argocd --secret-variable USER=$USERNAME --secret-variable PASS=$PASSWORD
+kubectl testkube run test argocd --secret-variable USER="" --secret-variable PASS=""
 ```

@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "e82bc43d-bbb4-468d-8c52-50e1dc712029",
+		"name": "Kube-Prometheus-Stack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30057446"
+	},
+	"item": [
+		{
+			"name": "Grafana",
+			"item": [
+				{
+					"name": "Grafana return datasource default",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Default datasource check\", function () {",
+									" const responseJson =  pm.response.json();",
+									" const [firstDatasource] = responseJson.filter(function(obj){",
+									"   return obj.isDefault",
+									" })",
+									" pm.expect(firstDatasource.name).to.eql(pm.environment.get(\"GRAFANA_DATASOURCE\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{GRAFANA_PASS}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{GRAFANA_USER}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://kube-prometheus-stack-grafana.tks-system.svc.cluster.local/api/datasources",
+							"protocol": "http",
+							"host": [
+								"kube-prometheus-stack-grafana",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"path": [
+								"api",
+								"datasources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Grafana health check endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check status database\", function () {",
+									" const responseJson = pm.response.json();",
+									" pm.expect(responseJson.database).to.eql(\"ok\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://kube-prometheus-stack-grafana.tks-system.svc.cluster.local/api/health",
+							"protocol": "http",
+							"host": [
+								"kube-prometheus-stack-grafana",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prometheus",
+			"item": [
+				{
+					"name": "Prometheus health check endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Prometheus health check endpoint \", function () {",
+									"pm.response.to.have.body(\"Prometheus Server is Healthy.\\n\")",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://prometheus-tks-prometheus.tks-system.svc.cluster.local:9090/-/healthy",
+							"protocol": "http",
+							"host": [
+								"prometheus-tks-prometheus",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"port": "9090",
+							"path": [
+								"-",
+								"healthy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alertmanager health check endpoint",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Alertmanager health check endpoint\", function () {",
+									"pm.response.to.have.body(\"OK\")",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://prometheus-tks-alertmanager.tks-system.svc.cluster.local:9093/-/healthy",
+							"protocol": "http",
+							"host": [
+								"prometheus-tks-alertmanager",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"port": "9093",
+							"path": [
+								"-",
+								"healthy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alertmanager return active on Prometheus",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check have active Alertmanager on Prometheus\", function () {",
+									" let responseJson = pm.response.json();",
+									" pm.expect(responseJson.data.activeAlertmanagers.length).to.not.eql(0, \"No active alertmanager identified.\");",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://prometheus-tks-prometheus.tks-system.svc.cluster.local:9090/api/v1/alertmanagers",
+							"protocol": "http",
+							"host": [
+								"prometheus-tks-prometheus",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"alertmanagers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Node-exporter return",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check Node-exporter responseBody\", function () {",
+									"const jsonData = JSON.parse(responseBody);",
+									"jsonData.data.forEach(function (targets) {",
+									"pm.expect(targets.target.service).to.eql(\"kube-prometheus-stack-prometheus-node-exporter\", \"It was not possible to validate the return of the Node-exporter data query via the Prometheus API\"); ",
+									"pm.expect(targets.help).to.eql(\"Total number of scrapes by HTTP status code.\", \"It was not possible to consult the requested metric through the exporter.\");  ",
+									"})",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://prometheus-tks-prometheus.tks-system.svc.cluster.local:9090/api/v1/targets/metadata?match_target={job=\"node-exporter\"}&metric=promhttp_metric_handler_requests_total",
+							"protocol": "http",
+							"host": [
+								"prometheus-tks-prometheus",
+								"tks-system",
+								"svc",
+								"cluster",
+								"local"
+							],
+							"port": "9090",
+							"path": [
+								"api",
+								"v1",
+								"targets",
+								"metadata"
+							],
+							"query": [
+								{
+									"key": "match_target",
+									"value": "{job=\"node-exporter\"}"
+								},
+								{
+									"key": "metric",
+									"value": "promhttp_metric_handler_requests_total"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GRAFANA_USER",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "GRAFANA_PASS",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "GRAFANA_DATASOURCE",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
