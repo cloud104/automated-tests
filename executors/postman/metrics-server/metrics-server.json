@@ -13,6 +13,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"setTimeout(() => {}, 15000000); ",
+							"",
 							"pm.test(\"Response status code is 200\", function () {",
 							"  pm.response.to.have.status(200);",
 							"});"
