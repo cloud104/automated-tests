@@ -22,7 +22,7 @@
 				}
 			],
 			"protocolProfileBehavior": {
-				"strictSSL": true
+				"strictSSL": false
 			},
 			"request": {
 				"auth": {
