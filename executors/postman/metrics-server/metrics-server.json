@@ -30,7 +30,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{$TOKEN}}",
+							"value": "{{TOKEN}}}}",
 							"type": "string"
 						}
 					]
@@ -80,7 +80,7 @@
 	],
 	"variable": [
 		{
-			"key": "$TOKEN",
+			"key": "TOKEN",
 			"value": "`cat /var/run/secrets/kubernetes.io/serviceaccount/token`",
 			"type": "string"
 		}
