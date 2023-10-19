@@ -22,7 +22,8 @@
 				}
 			],
 			"protocolProfileBehavior": {
-				"strictSSL": false
+				"strictSSL": true,
+				"disableUrlEncoding": true
 			},
 			"request": {
 				"auth": {
