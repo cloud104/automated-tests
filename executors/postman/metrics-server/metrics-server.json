@@ -22,7 +22,9 @@
 				}
 			],
 			"protocolProfileBehavior": {
-				"strictSSL": false
+				"strictSSL": false,
+				"disabledSystemHeaders": {},
+				"disableUrlEncoding": true
 			},
 			"request": {
 				"auth": {
@@ -81,7 +83,7 @@
 	"variable": [
 		{
 			"key": "TOKEN",
-			"value": "cat /var/run/secrets/kubernetes.io/serviceaccount/token",
+			"value": "$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)",
 			"type": "string"
 		}
 	]
