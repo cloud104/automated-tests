@@ -22,18 +22,21 @@
 				}
 			],
 			"protocolProfileBehavior": {
-				"strictSSL": false,
-				"disableUrlEncoding": true
+				"strictSSL": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{$TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
 					"raw": "https://metrics-server.tks-system.svc.cluster.local/apis/metrics.k8s.io/v1beta1/nodes",
 					"protocol": "https",
@@ -78,7 +81,7 @@
 	"variable": [
 		{
 			"key": "$TOKEN",
-			"value": "",
+			"value": "`cat /var/run/secrets/kubernetes.io/serviceaccount/token`",
 			"type": "string"
 		}
 	]
