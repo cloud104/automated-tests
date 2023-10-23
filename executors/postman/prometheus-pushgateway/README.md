@@ -5,7 +5,7 @@
 ## Verifications:
 
 - Checks if the health endpoint is as expected. (Expected: "OK")
-- checks whether the application is ready to serve traffic. (Expected: "OK")
+- Checks whether the application is ready to serve traffic. (Expected: "OK")
 - Checks if it is possible to send a random metric through an http request. (Expected status code: "200")
  
 
