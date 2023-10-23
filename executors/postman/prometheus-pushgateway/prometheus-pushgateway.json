@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "27f8b0ef-11b4-47bc-afa4-54e29824d8fd",
+		"name": "Pushgateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30057446"
+	},
+	"item": [
+		{
+			"name": "Pushgateway health check endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Pushgateway health check endpoint\", function () {",
+							"pm.response.to.have.body(\"OK\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://prometheus-pushgateway.tks-system.svc.cluster.local:9091/-/healthy",
+					"protocol": "http",
+					"host": [
+						"prometheus-pushgateway",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "9091",
+					"path": [
+						"-",
+						"healthy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check pushgateway is ready",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check Pushgateway is ready\", function () {",
+							"pm.response.to.have.body(\"OK\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://prometheus-pushgateway.tks-system.svc.cluster.local:9091/-/ready",
+					"protocol": "http",
+					"host": [
+						"prometheus-pushgateway",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "9091",
+					"path": [
+						"-",
+						"ready"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pushing test metric",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "testkube_test_metric{check=\"pushgateway\",method=\"post\"} 100\n\n"
+				},
+				"url": {
+					"raw": "http://prometheus-pushgateway.tks-system.svc.cluster.local:9091/metrics/job/testkube_test_metric",
+					"protocol": "http",
+					"host": [
+						"prometheus-pushgateway",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "9091",
+					"path": [
+						"metrics",
+						"job",
+						"testkube_test_metric"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
