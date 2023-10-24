@@ -13,12 +13,12 @@
 
 - http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/session (requires authentication)
 - http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/repositories (requires authentication)
+- http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/applications? (requires authentication)
 
 
 ## Variables:
 
-- USER (--secret-variable)
-- PASS (--secret-variable)
+- ARGOCD_PASS (--secret-variable)
 
 
 ## Create Test:

@@ -20,7 +20,9 @@
 							"var jsonData = JSON.parse(responseBody);",
 							"pm.environment.set(\"TOKEN\", jsonData.token);",
 							"",
-							""
+							"pm.test(\"Check Token is valid\", function() {",
+							"pm.expect(pm.environment.get(\"TOKEN\")).to.not.eql(null);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -34,7 +36,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \"username\": \"{{USER}}\",\n    \"password\": \"{{PASS}}\"\n}",
+					"raw": "{   \"username\": \"{{ARGOCD_USER}}\",\n    \"password\": \"{{ARGOCD_PASS}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -61,7 +63,7 @@
 			"response": []
 		},
 		{
-			"name": "Return status of repositories",
+			"name": "Check return status of repositories",
 			"event": [
 				{
 					"listen": "test",
@@ -113,6 +115,73 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Check return of applications",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Checks Sync status of applications\", function () {",
+							"const jsonData = JSON.parse(responseBody);",
+							"jsonData.items.forEach(function (item) {",
+							"pm.expect(item.status.sync.status).to.eql(\"Synced\", `Failed check sync of application: ${item.metadata.name}`);  ",
+							"})",
+							"});",
+							"",
+							"pm.test(\"Checks Health of applications\", function () {",
+							"const jsonData = JSON.parse(responseBody);",
+							"jsonData.items.forEach(function (item) {",
+							"pm.expect(item.status.health.status).to.eql(\"Healthy\", `Failed health check of application: ${item.metadata.name}`);  ",
+							"})",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/applications?",
+					"protocol": "http",
+					"host": [
+						"argo-cd-argocd-server",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"path": [
+						"api",
+						"v1",
+						"applications"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -142,12 +211,12 @@
 			"type": "string"
 		},
 		{
-			"key": "USER",
-			"value": "",
+			"key": "ARGOCD_USER",
+			"value": "admin",
 			"type": "string"
 		},
 		{
-			"key": "PASS",
+			"key": "ARGOCD_PASS",
 			"value": "",
 			"type": "string"
 		}
