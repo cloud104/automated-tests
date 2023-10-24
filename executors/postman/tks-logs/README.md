@@ -18,8 +18,8 @@
 
 ## Variables:
 
-- USER (--sercret-variable)
-- PASS (--sercret-variable)
+- TKSLOGS_USER (--sercret-variable)
+- TKSLOGS_PASS (--sercret-variable)
 
 
 ## Create Test:

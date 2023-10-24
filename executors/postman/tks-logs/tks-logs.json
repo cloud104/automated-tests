@@ -31,7 +31,7 @@
 						}
 					],
 					"protocolProfileBehavior": {
-						"strictSSL": true
+						"strictSSL": false
 					},
 					"request": {
 						"auth": {
@@ -39,12 +39,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "{{PASS}}",
+									"value": "{{TKSLOGS_PASS}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "{{USER}}",
+									"value": "{{TKSLOGS_USER}}",
 									"type": "string"
 								}
 							]
@@ -108,12 +108,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "{{PASS}}",
+									"value": "{{TKSLOGS_PASS}}",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "{{USER}}",
+									"value": "{{TKSLOGS_USER}}",
 									"type": "string"
 								}
 							]
@@ -164,12 +164,12 @@
 	],
 	"variable": [
 		{
-			"key": "USER",
+			"key": "TKSLOGS_USER",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"key": "PASS",
+			"key": "TKSLOGS_PASS",
 			"value": "",
 			"type": "string"
 		}
