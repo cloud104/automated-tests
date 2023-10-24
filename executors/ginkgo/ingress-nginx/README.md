@@ -1,4 +1,4 @@
-# Name: Externaldns-Ingress
+# Name: Ingress-Nginx
 
 ## TestKube Type: Golang/Ginkgo
 
@@ -15,11 +15,11 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name externaldns-ingress --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/externaldns_ingress
+kubectl testkube create test --name ingress-nginx --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/externaldns_ingress
 ```
 
 ## Run Test:
 
 ```
-kubectl testkube run test externaldns-ingress -v CLUSTER_ID="" -v REGION_DNS=""
+kubectl testkube run test ingress-nginx -v CLUSTER_ID="" -v REGION_DNS=""
 ```

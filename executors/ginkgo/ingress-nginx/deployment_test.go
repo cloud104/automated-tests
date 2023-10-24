@@ -1,4 +1,4 @@
-package externaldns_ingress_test
+package ingress_nginx_test
 
 import (
 	"context"
