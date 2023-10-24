@@ -1,6 +1,6 @@
 module github.com/cloud104/automated-tests/executors/ginkgo/ingress-nginx
 
-go 1.21.3
+go 1.21.2
 
 require (
 	github.com/hashicorp/go-multierror v1.1.1
