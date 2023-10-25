@@ -15,7 +15,7 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name ingress-nginx --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/externaldns_ingress
+kubectl testkube create test --name ingress-nginx --type ginkgo/test --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/ginkgo/ingress-nginx
 ```
 
 ## Run Test:

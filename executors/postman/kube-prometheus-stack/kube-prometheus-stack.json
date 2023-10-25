@@ -216,7 +216,7 @@
 									"});",
 									"",
 									"pm.test(\"Check have active Alertmanager on Prometheus\", function () {",
-									" let responseJson = pm.response.json();",
+									" var responseJson = pm.response.json();",
 									" pm.expect(responseJson.data.activeAlertmanagers.length).to.not.eql(0, \"No active alertmanager identified.\");",
 									"})",
 									""
