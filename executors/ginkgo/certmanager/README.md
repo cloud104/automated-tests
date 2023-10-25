@@ -4,7 +4,7 @@
 
 ## Verifications:
 
-- The check validates if you can create a certificate using your CRD using a yaml manifest.
+- The check validates if you can create a certificate through yaml manifest.
 
 ## Variables:
 
