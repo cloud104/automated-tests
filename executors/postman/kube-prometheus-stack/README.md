@@ -19,7 +19,7 @@
 ### Alertmanager
 
 - Checks if the health endpoint is as expected. (Expected: "OK")
-- Check have active Alertmanager on Prometheus.
+- Check have active alertmanager on prometheus.
 
 ### Node-exporter
 
