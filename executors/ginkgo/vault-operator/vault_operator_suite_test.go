@@ -1,0 +1,13 @@
+package vault_operator_test
+
+import (
+	"testing"
+
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+)
+
+func TestVaultOperator(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "VaultOperator Suite")
+}
