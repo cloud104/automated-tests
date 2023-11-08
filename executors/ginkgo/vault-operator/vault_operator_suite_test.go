@@ -2,6 +2,7 @@ package vault_operator_test
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
@@ -40,12 +41,12 @@ type Testing struct {
 func initialize(contextContext context.Context) (*Testing, error) {
 	config, err := k8s.NewConfig()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create Kubernetes configuration: %w", err)
 	}
 
 	clientset, err := k8s.NewClientset(config)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create Kubernetes clientset: %w", err)
 	}
 
 	coreClient := k8s.NewCoreV1Client(clientset)
@@ -53,21 +54,21 @@ func initialize(contextContext context.Context) (*Testing, error) {
 
 	manifestReader, err := k8s.NewManifestReader(config)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create manifest reader: %w", err)
 	}
 
 	vaultOperatorClient := vaultoperator.NewClient(coreClient, manifestReader)
 
 	vaultConfig, err := intlvault.NewConfig()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create Vault configuration: %w", err)
 	}
 
 	httpClient := &http.Client{}
 
 	vaultClient, err := intlvault.NewClient(contextContext, vaultConfig, httpClient)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create Vault client: %w", err)
 	}
 
 	vaultSecrets := intlvault.NewSecrets(vaultClient)
