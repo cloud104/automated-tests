@@ -43,7 +43,7 @@ spec:
             bound_service_account_names: [ "*" ]
             bound_service_account_namespaces: [ "default" ]
             policies: [ "allow_secrets" ]
-            ttl: 1h
+            ttl: 10m
       - type: userpass
         users:
           - username: admin

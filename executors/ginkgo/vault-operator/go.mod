@@ -4,6 +4,7 @@ go 1.21.3
 
 require (
 	github.com/caarlos0/env/v9 v9.0.0
+	github.com/google/wire v0.5.1-0.20220620021424-0675cdc9191c
 	github.com/hashicorp/vault-client-go v0.4.2
 	github.com/lmittmann/tint v1.0.3
 	github.com/onsi/ginkgo/v2 v2.13.0
