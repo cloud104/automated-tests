@@ -24,9 +24,9 @@ The following environment variables are available for configuring the tests:
 | PROFILE_ACTIVE   | kubernetes                         | kubernetes, local |
 | TEST_SKIP_DELETE | false                              | true, false       |
 | TEST_TIMEOUT     | 1m                                 |                   |
-| VAULT_ADDRESS    | http://vault-test.<namespace>:8200 |                   |
-| VAULT_USERNAME   | <generated>                        |                   |
-| VAULT_PASSWORD   | <generated>                        |                   |
+| VAULT_ADDRESS    | http://vault-test.`namespace`:8200 |                   |
+| VAULT_USERNAME   | `generated`                        |                   |
+| VAULT_PASSWORD   | `generated`                        |                   |
 
 ## Running the Tests
 
