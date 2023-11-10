@@ -1,6 +1,32 @@
-# VaultOperator Tests
+# Name: VaultOperator
 
-This repository contains automated tests for the VaultOperator using TestKube.
+## TestKube Type: Golang/Ginkgo
+
+## Verifications:
+
+Feature: Installing Vault using the Operator
+
+  Scenario: Applying the Operator CRD
+    Given the Operator CRD is applied
+    Then eventually, there should be 1 ready pod
+
+  Scenario: Completing the installation process
+    Given the installation process is complete
+    When creating a new secret to Vault
+    Then the new secret should be accessible
+
+### Environment Variables
+
+The following environment variables are available for configuring the tests:
+
+| Variable         | Default Value                      | Allowed Values    |
+|------------------|------------------------------------|-------------------|
+| PROFILE_ACTIVE   | kubernetes                         | kubernetes, local |
+| TEST_SKIP_DELETE | false                              | true, false       |
+| TEST_TIMEOUT     | 1m                                 |                   |
+| VAULT_ADDRESS    | http://vault-test.<namespace>:8200 |                   |
+| VAULT_USERNAME   | <generated>                        |                   |
+| VAULT_PASSWORD   | <generated>                        |                   |
 
 ## Running the Tests
 
