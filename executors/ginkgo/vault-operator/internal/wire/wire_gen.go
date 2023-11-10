@@ -8,9 +8,8 @@ package wire
 
 import (
 	"context"
+	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/config"
 	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/k8s"
-	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/profiles"
-	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/temporary"
 	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/vault"
 	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/vaultoperator"
 	"net/http"
@@ -18,51 +17,66 @@ import (
 
 // Injectors from injectors.go:
 
-func SetUp(contextContext context.Context) (*Test, error) {
-	config, err := profiles.NewConfig()
+func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
+	profile, err := config.NewProfile()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	restConfig, err := k8s.NewConfig(config)
+	restConfig, err := k8s.NewConfig(profile)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	clientset, err := k8s.NewClientset(restConfig)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	coreV1Interface := k8s.NewCoreV1Client(clientset)
-	namespace := temporary.NewNamespace(coreV1Interface)
+
+	namespace, cleanup, err := k8s.NewNamespace(ctx, basename, coreV1Interface)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	configVault, err := config.NewVault(namespace)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+
+	client := &http.Client{}
+
+	vaultClient, err := vault.NewClient(ctx, configVault, client)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+
+	secrets := vault.NewSecrets(vaultClient, configVault)
 
 	reader, err := k8s.NewManifestReader(restConfig)
 	if err != nil {
-		return nil, err
+		cleanup()
+		return nil, nil, err
 	}
 
-	client := vaultoperator.NewClient(coreV1Interface, reader)
-	authenticator := vault.NewAuthenticator(config)
+	vaultoperatorClient := vaultoperator.NewClient(configVault, coreV1Interface, reader)
 
-	vaultConfig, err := vault.NewConfig()
+	test, err := config.NewTest()
 	if err != nil {
-		return nil, err
+		cleanup()
+		return nil, nil, err
 	}
 
-	httpClient := &http.Client{}
-
-	vaultClient, err := vault.NewClient(contextContext, vaultConfig, httpClient)
-	if err != nil {
-		return nil, err
+	wireTest := &Test{
+		Secrets:  secrets,
+		Operator: vaultoperatorClient,
+		Config:   test,
 	}
 
-	secrets := vault.NewSecrets(authenticator, vaultClient)
-	test := &Test{
-		TemporaryNamespace: namespace,
-		VaultOperator:      client,
-		VaultSecrets:       secrets,
-	}
-
-	return test, nil
+	return wireTest, func() {
+		cleanup()
+	}, nil
 }

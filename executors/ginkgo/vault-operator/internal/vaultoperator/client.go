@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"fmt"
 
+	"github.com/buger/jsonparser"
 	"github.com/totvs-cloud/go-manifest"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -13,6 +14,7 @@ import (
 	typedcorev1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
 	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/collections"
+	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/config"
 	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/k8s"
 )
 
@@ -20,21 +22,27 @@ import (
 var manifestBytes []byte
 
 type Client struct {
+	config         *config.Vault
 	k8sClient      typedcorev1.CoreV1Interface
 	manifestReader *manifest.Reader
 }
 
-func NewClient(k8sClient typedcorev1.CoreV1Interface, manifestReader *manifest.Reader) *Client {
-	return &Client{k8sClient: k8sClient, manifestReader: manifestReader}
+func NewClient(config *config.Vault, k8sClient typedcorev1.CoreV1Interface, manifestReader *manifest.Reader) *Client {
+	return &Client{config: config, k8sClient: k8sClient, manifestReader: manifestReader}
 }
 
-func (c *Client) ApplyManifests(ctx context.Context, namespace string) (manifest.List, error) {
+func (c *Client) ApplyManifests(ctx context.Context) (manifest.List, error) {
 	m, err := c.manifestReader.FromBytes(manifestBytes)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse manifest: %w", err)
 	}
 
-	m, err = m.Transform(namespaceTo(namespace))
+	m, err = m.Transform(namespaceTo(c.config.Namespace))
+	if err != nil {
+		return nil, fmt.Errorf("failed to transform manifest: %w", err)
+	}
+
+	m, err = m.Transform(credentialsTo(c.config.Username, c.config.Password))
 	if err != nil {
 		return nil, fmt.Errorf("failed to transform manifest: %w", err)
 	}
@@ -46,27 +54,14 @@ func (c *Client) ApplyManifests(ctx context.Context, namespace string) (manifest
 	return m, nil
 }
 
-func (c *Client) CleanUp(ctx context.Context, namespace string, manifests manifest.List) error {
-	m, err := manifests.Transform(namespaceTo(namespace))
-	if err != nil {
-		return fmt.Errorf("failed to transform manifests: %w", err)
-	}
-
-	if err = m.Delete(ctx); err != nil {
-		return fmt.Errorf("failed to delete resources: %w", err)
-	}
-
-	return nil
-}
-
-func (c *Client) CountReadyPods(ctx context.Context, namespace string) (int, error) {
+func (c *Client) CountReadyPods(ctx context.Context) (int, error) {
 	labelSelector := metav1.LabelSelector{MatchLabels: map[string]string{
 		"app.kubernetes.io/name":             "vault",
 		"statefulset.kubernetes.io/pod-name": "vault-test-0",
 		"vault_cr":                           "vault-test",
 	}}
 
-	list, err := c.k8sClient.Pods(namespace).List(ctx, metav1.ListOptions{
+	list, err := c.k8sClient.Pods(c.config.Namespace).List(ctx, metav1.ListOptions{
 		LabelSelector: labels.Set(labelSelector.MatchLabels).String(),
 	})
 	if err != nil {
@@ -87,5 +82,35 @@ func namespaceTo(namespace string) func(u *unstructured.Unstructured) error {
 		}
 
 		return nil
+	}
+}
+
+func credentialsTo(username, password string) func(u *unstructured.Unstructured) error {
+	return func(u *unstructured.Unstructured) error {
+		if u.GetAPIVersion() != "vault.banzaicloud.com/v1alpha1" || u.GetKind() != "Vault" {
+			return nil
+		}
+
+		users := Users{{
+			Username:      username,
+			Password:      password,
+			TokenPolicies: "allow_secrets",
+		}}
+
+		uj, err := users.Marshal()
+		if err != nil {
+			return err
+		}
+
+		data, err := u.MarshalJSON()
+		if err != nil {
+			return err
+		}
+
+		if data, err = jsonparser.Set(data, uj, "spec", "externalConfig", "auth", "[0]", "users"); err != nil {
+			return err
+		}
+
+		return u.UnmarshalJSON(data)
 	}
 }

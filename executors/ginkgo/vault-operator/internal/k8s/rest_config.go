@@ -9,11 +9,11 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
-	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/profiles"
+	"github.com/cloud104/automated-tests/executors/ginkgo/vault-operator/internal/config"
 )
 
-func NewConfig(config *profiles.Config) (*rest.Config, error) {
-	if strings.EqualFold(config.Active, "local") {
+func NewConfig(profile *config.Profile) (*rest.Config, error) {
+	if strings.EqualFold(profile.Active, "local") {
 		return localConfig()
 	}
 

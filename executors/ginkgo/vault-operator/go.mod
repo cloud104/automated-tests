@@ -3,8 +3,9 @@ module github.com/cloud104/automated-tests/executors/ginkgo/vault-operator
 go 1.21.3
 
 require (
+	github.com/brianvoe/gofakeit/v6 v6.24.0
+	github.com/buger/jsonparser v1.1.1
 	github.com/caarlos0/env/v9 v9.0.0
-	github.com/google/wire v0.5.1-0.20220620021424-0675cdc9191c
 	github.com/hashicorp/vault-client-go v0.4.2
 	github.com/lmittmann/tint v1.0.3
 	github.com/onsi/ginkgo/v2 v2.13.0
@@ -30,6 +31,7 @@ require (
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/pprof v0.0.0-20210720184732-4bb14d4b1be1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	github.com/google/wire v0.5.1-0.20220620021424-0675cdc9191c // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.1 // indirect
 	github.com/hashicorp/go-rootcerts v1.0.2 // indirect

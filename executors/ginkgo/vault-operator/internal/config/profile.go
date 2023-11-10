@@ -1,4 +1,4 @@
-package profiles
+package config
 
 import (
 	"fmt"
@@ -6,13 +6,13 @@ import (
 	env "github.com/caarlos0/env/v9"
 )
 
-type Config struct {
+type Profile struct {
 	Active string `env:"ACTIVE" envDefault:"kubernetes"`
 }
 
-func NewConfig() (*Config, error) {
-	cfg := &Config{}
-	if err := env.ParseWithOptions(cfg, env.Options{Prefix: "PROFILES_"}); err != nil {
+func NewProfile() (*Profile, error) {
+	cfg := &Profile{}
+	if err := env.ParseWithOptions(cfg, env.Options{Prefix: "PROFILE_"}); err != nil {
 		return nil, fmt.Errorf("error parsing Vault environment variables: %w", err)
 	}
 

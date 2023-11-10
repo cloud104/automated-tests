@@ -8,7 +8,7 @@ import (
 	"github.com/google/wire"
 )
 
-func SetUp(context.Context) (*Test, error) {
+func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 	wire.Build(providers)
-	return nil, nil
+	return nil, nil, nil
 }
