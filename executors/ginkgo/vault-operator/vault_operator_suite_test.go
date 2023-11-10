@@ -13,7 +13,6 @@ import (
 
 func TestVaultOperator(t *testing.T) {
 	logger := slog.New(tint.NewHandler(os.Stderr, &tint.Options{
-		AddSource:  true,
 		Level:      slog.LevelDebug,
 		TimeFormat: time.Kitchen,
 	}))
