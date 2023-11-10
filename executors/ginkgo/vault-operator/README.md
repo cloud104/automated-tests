@@ -19,14 +19,14 @@ Feature: Installing Vault using the Operator
 
 The following environment variables are available for configuring the tests:
 
-| Variable         | Default Value                      | Allowed Values    |
-|------------------|------------------------------------|-------------------|
-| PROFILE_ACTIVE   | kubernetes                         | kubernetes, local |
-| TEST_SKIP_DELETE | false                              | true, false       |
-| TEST_TIMEOUT     | 1m                                 |                   |
-| VAULT_ADDRESS    | http://vault-test.`namespace`:8200 |                   |
-| VAULT_USERNAME   | `generated`                        |                   |
-| VAULT_PASSWORD   | `generated`                        |                   |
+| Variable         | Default Value                      | Allowed Values    | Description                                               |
+|------------------|------------------------------------|-------------------|-----------------------------------------------------------|
+| PROFILE_ACTIVE   | kubernetes                         | kubernetes, local | Specifies the active profile for test configuration.       |
+| TEST_SKIP_DELETE | false                              | true, false       | Indicates whether to skip deletion of test resources.      |
+| TEST_TIMEOUT     | 1m                                 |                   | Sets the timeout duration for the tests.                   |
+| VAULT_ADDRESS    | http://vault-test.`namespace`:8200 |                   | The address for the Vault instance used in the tests.      |
+| VAULT_USERNAME   | `generated`                        |                   | The automatically generated username for Vault access, if not provided. |
+| VAULT_PASSWORD   | `generated`                        |                   | The automatically generated password for Vault access, if not provided. |
 
 ## Running the Tests
 
