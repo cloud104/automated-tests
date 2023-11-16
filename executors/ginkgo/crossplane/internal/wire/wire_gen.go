@@ -37,11 +37,18 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 		return nil, nil, err
 	}
 
-	test := &Test{
-		Namespace: namespace,
+	test, err := config.NewTest()
+	if err != nil {
+		cleanup()
+		return nil, nil, err
 	}
 
-	return test, func() {
+	wireTest := &Test{
+		Namespace: namespace,
+		Config:    test,
+	}
+
+	return wireTest, func() {
 		cleanup()
 	}, nil
 }
