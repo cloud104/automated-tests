@@ -11,13 +11,16 @@ import (
 //nolint:unused // This function is used during compile-time to generate code for dependency injection
 var providers = wire.NewSet(
 	config.NewProfile,
+	config.NewTest,
 	k8s.NewClientset,
 	k8s.NewConfig,
 	k8s.NewCoreV1Client,
+	k8s.NewManifestReader,
 	k8s.NewNamespace,
 	wire.Struct(new(Test), "*"),
 )
 
 type Test struct {
 	Namespace *corev1.Namespace
+	Config    *config.Test
 }
