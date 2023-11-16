@@ -8,12 +8,40 @@ package wire
 
 import (
 	"context"
+	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/config"
+	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/k8s"
 )
 
 // Injectors from injectors.go:
 
 func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
-	test := &Test{}
+	profile, err := config.NewProfile()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	restConfig, err := k8s.NewConfig(profile)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	clientset, err := k8s.NewClientset(restConfig)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	coreV1Interface := k8s.NewCoreV1Client(clientset)
+
+	namespace, cleanup, err := k8s.NewNamespace(ctx, basename, coreV1Interface)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	test := &Test{
+		Namespace: namespace,
+	}
+
 	return test, func() {
+		cleanup()
 	}, nil
 }
