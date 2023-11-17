@@ -3,6 +3,7 @@ module github.com/cloud104/automated-tests/executors/ginkgo/crossplane
 go 1.21.4
 
 require (
+	github.com/buger/jsonparser v1.1.1
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/google/wire v0.5.1-0.20220620021424-0675cdc9191c
 	github.com/onsi/ginkgo/v2 v2.13.1
