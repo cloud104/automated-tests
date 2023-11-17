@@ -11,7 +11,7 @@ import (
 
 const namespaceBasename = "crossplane-test"
 
-var _ = Describe("Crossplane", func() {
+var _ = Describe("Crossplane", Ordered, func() {
 	var (
 		test    *wire.Test
 		cleanup func()
@@ -41,7 +41,7 @@ var _ = Describe("Crossplane", func() {
 			m, err := test.Crossplane.ApplyProviderManifests(ctx)
 			Expect(err).NotTo(HaveOccurred())
 
-			manifests = manifests.Append(m)
+			manifests = m
 		})
 
 		It("should eventually be healthy", func(ctx SpecContext) {
