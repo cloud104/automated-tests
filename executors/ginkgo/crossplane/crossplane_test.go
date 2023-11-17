@@ -4,6 +4,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/totvs-cloud/go-manifest"
+	"k8s.io/apimachinery/pkg/api/meta"
 
 	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/wire"
 )
@@ -33,9 +34,38 @@ var _ = Describe("Crossplane", func() {
 		Expect(err).NotTo(HaveOccurred())
 	})
 
-	When("", func() {
-		It("", func() {
-			// TODO: implement tests scenarios
+	When("installing Kubernetes Provider", func() {
+		var currentRevision string
+
+		It("should apply Provider manifests", func(ctx SpecContext) {
+			m, err := test.Crossplane.ApplyProviderManifests(ctx)
+			Expect(err).NotTo(HaveOccurred())
+
+			manifests = manifests.Append(m)
+		})
+
+		It("should eventually be healthy", func(ctx SpecContext) {
+			Eventually(func() bool {
+				status, err := test.Crossplane.GetProviderStatus(ctx)
+				Expect(err).NotTo(HaveOccurred())
+
+				currentRevision = status.CurrentRevision
+				return meta.IsStatusConditionTrue(status.Conditions, "Healthy")
+			}).WithTimeout(test.Config.Timeout).Should(BeTrue())
+		})
+
+		It("should apply RBAC manifests", func(ctx SpecContext) {
+			m, err := test.Crossplane.ApplyRBACManifests(ctx, currentRevision)
+			Expect(err).NotTo(HaveOccurred())
+
+			manifests = manifests.Append(m)
+		})
+
+		It("should apply ProviderConfig manifests", func(ctx SpecContext) {
+			m, err := test.Crossplane.ApplyProviderConfigManifests(ctx)
+			Expect(err).NotTo(HaveOccurred())
+
+			manifests = manifests.Append(m)
 		})
 	})
 })
