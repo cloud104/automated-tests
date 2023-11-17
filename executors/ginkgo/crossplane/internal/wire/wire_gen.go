@@ -9,6 +9,7 @@ package wire
 import (
 	"context"
 	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/config"
+	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/crossplane"
 	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/k8s"
 )
 
@@ -37,6 +38,16 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 		return nil, nil, err
 	}
 
+	configCrossplane := config.NewCrossplane(namespace)
+
+	reader, err := k8s.NewManifestReader(restConfig)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+
+	client := crossplane.NewClient(configCrossplane, reader)
+
 	test, err := config.NewTest()
 	if err != nil {
 		cleanup()
@@ -44,8 +55,8 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 	}
 
 	wireTest := &Test{
-		Namespace: namespace,
-		Config:    test,
+		Crossplane: client,
+		Config:     test,
 	}
 
 	return wireTest, func() {

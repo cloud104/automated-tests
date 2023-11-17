@@ -1,0 +1,64 @@
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: kubernetes-provider
+spec:
+  package: "crossplanecontrib/provider-kubernetes:v0.9.0"
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubernetes-provider
+  namespace: crossplane-test
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods" ]
+    verbs: [ "*" ]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubernetes-provider
+  namespace: crossplane-test
+roleRef:
+  kind: Role
+  name: kubernetes-provider
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: kubernetes-provider-****
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: kubernetes-provider
+spec:
+  credentials:
+    source: InjectedIdentity
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: sample-pod
+  namespace: crossplane-test
+spec:
+  forProvider:
+    manifest:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        namespace: crossplane-test
+        labels:
+          app: sample-pod
+      spec:
+        containers:
+          - image: busybox
+            command:
+              - sleep
+              - "3600"
+            imagePullPolicy: IfNotPresent
+            name: busybox
+        restartPolicy: Always
+  providerConfigRef:
+    name: kubernetes-provider
