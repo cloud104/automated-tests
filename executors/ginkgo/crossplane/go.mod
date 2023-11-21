@@ -5,10 +5,11 @@ go 1.21.4
 require (
 	github.com/buger/jsonparser v1.1.1
 	github.com/caarlos0/env/v10 v10.0.0
+	github.com/go-logr/logr v1.3.0
 	github.com/google/wire v0.5.1-0.20220620021424-0675cdc9191c
 	github.com/onsi/ginkgo/v2 v2.13.1
 	github.com/onsi/gomega v1.30.0
-	github.com/totvs-cloud/go-manifest v1.0.0
+	github.com/totvs-cloud/go-manifest v1.2.0
 	k8s.io/api v0.28.4
 	k8s.io/apimachinery v0.28.4
 	k8s.io/client-go v0.28.4
@@ -17,7 +18,6 @@ require (
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emicklei/go-restful/v3 v3.9.0 // indirect
-	github.com/go-logr/logr v1.3.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.6 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect

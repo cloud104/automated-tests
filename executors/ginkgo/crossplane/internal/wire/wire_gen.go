@@ -26,7 +26,12 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 		return nil, nil, err
 	}
 
-	clientset, err := k8s.NewClientset(restConfig)
+	client, err := k8s.NewHTTPClient(restConfig)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	clientset, err := k8s.NewClientset(restConfig, client)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -40,13 +45,19 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 
 	configCrossplane := config.NewCrossplane(namespace)
 
-	reader, err := k8s.NewManifestReader(restConfig)
+	dynamicClient, err := k8s.NewDynamicClient(restConfig, client)
 	if err != nil {
 		cleanup()
 		return nil, nil, err
 	}
 
-	client := crossplane.NewClient(configCrossplane, reader)
+	reader, err := k8s.NewManifestReader(restConfig, client)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+
+	crossplaneClient := crossplane.NewClient(configCrossplane, coreV1Interface, dynamicClient, reader)
 
 	test, err := config.NewTest()
 	if err != nil {
@@ -55,7 +66,7 @@ func SetUp(ctx context.Context, basename string) (*Test, func(), error) {
 	}
 
 	wireTest := &Test{
-		Crossplane: client,
+		Crossplane: crossplaneClient,
 		Config:     test,
 	}
 
