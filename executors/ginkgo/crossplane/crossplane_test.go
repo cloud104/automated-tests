@@ -16,7 +16,7 @@ var _ = Describe("Crossplane", Ordered, func() {
 		test    *wire.Test
 		cleanup func()
 	)
-	var manifests manifest.List
+	manifests := manifest.EmptyList()
 
 	BeforeAll(func(ctx SpecContext) {
 		var err error
@@ -29,9 +29,10 @@ var _ = Describe("Crossplane", Ordered, func() {
 			return
 		}
 
-		defer cleanup()
-		err := manifests.Delete(ctx)
+		err := test.Crossplane.DeleteManifests(ctx, manifests)
 		Expect(err).NotTo(HaveOccurred())
+
+		cleanup()
 	})
 
 	When("installing Kubernetes Provider", func() {
@@ -41,13 +42,17 @@ var _ = Describe("Crossplane", Ordered, func() {
 			m, err := test.Crossplane.ApplyProviderManifests(ctx)
 			Expect(err).NotTo(HaveOccurred())
 
-			manifests = m
+			manifests = manifests.Append(m)
 		})
 
 		It("should eventually be healthy", func(ctx SpecContext) {
 			Eventually(func() bool {
 				status, err := test.Crossplane.GetProviderStatus(ctx)
 				Expect(err).NotTo(HaveOccurred())
+
+				if status == nil {
+					return false
+				}
 
 				currentRevision = status.CurrentRevision
 				return meta.IsStatusConditionTrue(status.Conditions, "Healthy")
@@ -66,6 +71,24 @@ var _ = Describe("Crossplane", Ordered, func() {
 			Expect(err).NotTo(HaveOccurred())
 
 			manifests = manifests.Append(m)
+		})
+	})
+
+	When("Kubernetes Provider is installed", func() {
+		It("should create Kubernetes resources via Crossplane", func(ctx SpecContext) {
+			m, err := test.Crossplane.ApplyObjectManifests(ctx)
+			Expect(err).NotTo(HaveOccurred())
+
+			manifests = manifests.Append(m)
+		})
+
+		It("should eventually have 1 ready pod", func(ctx SpecContext) {
+			Eventually(func() int {
+				count, err := test.Crossplane.CountReadySamplePods(ctx)
+				Expect(err).NotTo(HaveOccurred())
+
+				return count
+			}).WithTimeout(test.Config.Timeout).Should(Equal(1))
 		})
 	})
 })

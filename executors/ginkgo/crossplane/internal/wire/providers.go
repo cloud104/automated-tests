@@ -2,6 +2,7 @@ package wire
 
 import (
 	"github.com/google/wire"
+	"k8s.io/client-go/dynamic"
 
 	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/config"
 	"github.com/cloud104/automated-tests/executors/ginkgo/crossplane/internal/crossplane"
@@ -17,8 +18,11 @@ var providers = wire.NewSet(
 	k8s.NewClientset,
 	k8s.NewConfig,
 	k8s.NewCoreV1Client,
+	k8s.NewDynamicClient,
+	k8s.NewHTTPClient,
 	k8s.NewManifestReader,
 	k8s.NewNamespace,
+	wire.Bind(new(dynamic.Interface), new(*dynamic.DynamicClient)),
 	wire.Struct(new(Test), "*"),
 )
 
