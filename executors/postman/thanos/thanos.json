@@ -46,6 +46,88 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Checking the health of Thanos Query",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body should be 'OK'\", function () {",
+							"    pm.response.to.have.body(\"OK\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{QUERY_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local/-/healthy",
+					"protocol": "http",
+					"host": [
+						"{{QUERY_SERVICE_NAME}}",
+						"{{NAMESPACE}}",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"path": [
+						"-",
+						"healthy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify the Health of Thanos Query Frontend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body should be 'OK'\", function () {",
+							"    pm.response.to.have.body(\"OK\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{QUERY_FRONTEND_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local/-/healthy",
+					"protocol": "http",
+					"host": [
+						"{{QUERY_FRONTEND_SERVICE_NAME}}",
+						"{{NAMESPACE}}",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"path": [
+						"-",
+						"healthy"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
@@ -56,6 +138,14 @@
 		{
 			"key": "NAMESPACE",
 			"value": "tks-system"
+		},
+		{
+			"key": "QUERY_SERVICE_NAME",
+			"value": "thanos-tks-query"
+		},
+		{
+			"key": "QUERY_FRONTEND_SERVICE_NAME",
+			"value": "argo-cd-argocd-server"
 		}
 	]
 }
