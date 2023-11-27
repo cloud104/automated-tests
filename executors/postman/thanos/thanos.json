@@ -30,7 +30,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{COMPACTOR_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local/-/healthy",
+					"raw": "http://{{COMPACTOR_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local:{{COMPACTOR_PORT}}/-/healthy",
 					"protocol": "http",
 					"host": [
 						"{{COMPACTOR_SERVICE_NAME}}",
@@ -39,6 +39,7 @@
 						"cluster",
 						"local"
 					],
+					"port": "{{COMPACTOR_PORT}}",
 					"path": [
 						"-",
 						"healthy"
@@ -71,7 +72,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{QUERY_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local/-/healthy",
+					"raw": "http://{{QUERY_SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local:{{QUERY_PORT}}/-/healthy",
 					"protocol": "http",
 					"host": [
 						"{{QUERY_SERVICE_NAME}}",
@@ -80,6 +81,7 @@
 						"cluster",
 						"local"
 					],
+					"port": "{{QUERY_PORT}}",
 					"path": [
 						"-",
 						"healthy"
@@ -121,6 +123,14 @@
 		{
 			"key": "QUERY_SERVICE_NAME",
 			"value": "thanos-tks-query"
+		},
+		{
+			"key": "COMPACTOR_PORT",
+			"value": "9090"
+		},
+		{
+			"key": "QUERY_PORT",
+			"value": "9090"
 		}
 	]
 }
