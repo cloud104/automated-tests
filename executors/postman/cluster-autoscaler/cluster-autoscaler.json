@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b3af011c-d005-4cae-bd9d-b8f1b82b9c39",
+		"_postman_id": "bcdbf87c-a984-4d36-a866-9c1f5761bc8f",
 		"name": "Cluster Autoscaler",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "651611"
@@ -30,7 +30,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local/health-check",
+					"raw": "http://{{SERVICE_NAME}}.{{NAMESPACE}}.svc.cluster.local:{{PORT}}/health-check",
 					"protocol": "http",
 					"host": [
 						"{{SERVICE_NAME}}",
@@ -39,6 +39,7 @@
 						"cluster",
 						"local"
 					],
+					"port": "{{PORT}}",
 					"path": [
 						"health-check"
 					]
@@ -55,6 +56,10 @@
 		{
 			"key": "NAMESPACE",
 			"value": "tks-system"
+		},
+		{
+			"key": "PORT",
+			"value": "8085"
 		}
 	]
 }
