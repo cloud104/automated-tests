@@ -1,0 +1,13 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: test-curl
+  namespace: tks-system
+  labels:
+    executor: curl-executor
+    test-type: curl-test
+spec:
+  type: curl/test
+  content:
+    type: string
+    data: "{\n  \"command\": [\n    \"curl\",\n    \"https://www.uol.com.br/\",\n    \"-H\",\n    \"'Accept: application/json'\"\n  ],\n  \"expected_status\": \"200\"\n}"
