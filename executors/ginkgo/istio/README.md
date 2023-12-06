@@ -4,6 +4,7 @@
 
 ## Verifications:
 
+```
 Feature: Istio is up and running
 
   Scenario: IstioOperator CRD Health Check
@@ -30,6 +31,7 @@ Feature: Istio is up and running
 
     When the prometheus deployment is checked
     Then it should have an available prometheus deployment
+```
 
 ### Environment Variables
 
