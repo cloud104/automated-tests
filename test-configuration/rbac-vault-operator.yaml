@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault-operator-testkube-job
+  namespace: tks-system
+#---
+#apiVersion: rbac.authorization.k8s.io/v1
+#kind: ClusterRoleBinding
+#metadata:
+#  name: vault-operator-clusterrolebinding-testkube-job
+#roleRef:
+#  apiGroup: rbac.authorization.k8s.io
+#  kind: ClusterRole
+#  name: vault-operator-clusterrole-testkube-job
+#subjects:
+#  - kind: ServiceAccount
+#    name: vault-operator-testkube-job
+#    namespace: tks-system
+#---
+#apiVersion: rbac.authorization.k8s.io/v1
+#kind: ClusterRole
+#metadata:
+#  name: vault-operator-clusterrole-testkube-job
+#rules:
+#  - apiGroups:
+#      - batch
+#    resources:
+#      - jobs
+#    verbs:
+#      - get
+#      - watch
+#      - list
+#      - create
+#      - delete
+#  - apiGroups:
+#      - ""
+#    resources:
+#      - pods
+#      - pods/log
+#    verbs:
+#      - get
+#      - watch
+#      - list
+#      - create
+#      - delete
