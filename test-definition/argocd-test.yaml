@@ -1,0 +1,22 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  name: test-argocd
+  namespace: tks-system
+  labels:
+    executor: postman-executor
+    test-type: postman-collection
+spec:
+  type: postman/collection
+  content:
+    repository:
+      branch: master
+      path: executors/postman/argocd/argocd.json
+  source: testsource-tks-automated-tests
+  executionRequest:
+    variables:
+      ARGOCD_PASS:
+        name: ARGOCD_PASS
+        type: basic
+    jobTemplateReference: job-template-worker-system
+    executePostRunScriptBeforeScraping: false

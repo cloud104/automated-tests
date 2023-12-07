@@ -1,0 +1,12 @@
+apiVersion: tests.testkube.io/v1
+kind: TestSource
+metadata:
+  name: testsource-tks-automated-tests
+  namespace: testkube-system
+spec:
+  type: git
+  repository:
+    type: git
+    uri: https://github.com/cloud104/automated-tests.git
+    branch: master
+    path: /
