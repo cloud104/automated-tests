@@ -15,7 +15,7 @@ type Test struct {
 func NewTest() (*Test, error) {
 	cfg := &Test{}
 	if err := env.Parse(cfg); err != nil {
-		return nil, fmt.Errorf("error parsing Vault environment variables: %w", err)
+		return nil, fmt.Errorf("error parsing test environment variables: %w", err)
 	}
 
 	return cfg, nil

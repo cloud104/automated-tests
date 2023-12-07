@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	env "github.com/caarlos0/env/v9"
+	"github.com/caarlos0/env/v9"
 )
 
 type Test struct {
@@ -15,7 +15,7 @@ type Test struct {
 func NewTest() (*Test, error) {
 	cfg := &Test{}
 	if err := env.ParseWithOptions(cfg, env.Options{Prefix: "TEST_"}); err != nil {
-		return nil, fmt.Errorf("error parsing Vault environment variables: %w", err)
+		return nil, fmt.Errorf("error parsing test environment variables: %w", err)
 	}
 
 	return cfg, nil
