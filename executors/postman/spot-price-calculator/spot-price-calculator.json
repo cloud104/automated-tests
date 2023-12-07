@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "33067261-d55c-4c4e-8c5b-b25043c7c4f7",
+		"name": "Spot Price Calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "651611"
+	},
+	"item": [
+		{
+			"name": "Check if the spot price calculator's metrics endpoint works",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response content length should not be zero\", function () {",
+							"    pm.response.to.have.header(\"Content-Length\");",
+							"    var contentLength = parseInt(pm.response.headers.get(\"Content-Length\"));",
+							"    pm.expect(contentLength).to.be.above(0);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{SERVICE_NAME}}.{{NAMESPACE}}:{{PORT}}/metrics",
+					"protocol": "http",
+					"host": [
+						"{{SERVICE_NAME}}",
+						"{{NAMESPACE}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVICE_NAME",
+			"value": "spot-price-calculator"
+		},
+		{
+			"key": "NAMESPACE",
+			"value": "tks-system"
+		},
+		{
+			"key": "PORT",
+			"value": "8080"
+		}
+	]
+}
