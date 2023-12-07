@@ -1,26 +1,26 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: istio-testkube-job
+  name: test-istio-testkube-job
   namespace: tks-system
 #---
 #apiVersion: rbac.authorization.k8s.io/v1
 #kind: ClusterRoleBinding
 #metadata:
-#  name: istio-clusterrolebinding-testkube-job
+#  name: test-istio-clusterrolebinding-testkube-job
 #roleRef:
 #  apiGroup: rbac.authorization.k8s.io
 #  kind: ClusterRole
 #  name: istio-clusterrole-testkube-job
 #subjects:
 #  - kind: ServiceAccount
-#    name: istio-testkube-job
+#    name: test-istio-testkube-job
 #    namespace: tks-system
 #---
 #apiVersion: rbac.authorization.k8s.io/v1
 #kind: ClusterRole
 #metadata:
-#  name: istio-clusterrole-testkube-job
+#  name: test-istio-clusterrole-testkube-job
 #rules:
 #  - apiGroups:
 #      - batch
