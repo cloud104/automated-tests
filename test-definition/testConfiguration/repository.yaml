@@ -2,7 +2,7 @@ apiVersion: tests.testkube.io/v1
 kind: TestSource
 metadata:
   name: testsource-tks-automated-tests
-  namespace: testkube-system
+  namespace: tks-system
 spec:
   type: git
   repository:
