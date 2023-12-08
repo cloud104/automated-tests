@@ -43,3 +43,25 @@ rules:
      - list
      - create
      - delete
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests
+   verbs:
+   - create
+   - delete
+   - get
+   - list
+   - patch
+   - update
+   - watch
+   - deletecollection
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests/status
+   verbs:
+   - get
+   - patch
+   - update
+
