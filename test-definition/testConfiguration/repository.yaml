@@ -2,7 +2,6 @@ apiVersion: tests.testkube.io/v1
 kind: TestSource
 metadata:
   annotations:
-    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "-1"    
   name: testsource-tks-automated-tests
   namespace: tks-system
