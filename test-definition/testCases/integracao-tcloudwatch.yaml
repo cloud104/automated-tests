@@ -4,7 +4,7 @@ kind: Test
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"    
-  name: test-integracao-tcloudwatch
+  name: test-integracao-cloudwatch
   namespace: tks-system
   labels:
     executor: curl-executor
