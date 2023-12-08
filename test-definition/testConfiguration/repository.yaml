@@ -1,6 +1,8 @@
 apiVersion: tests.testkube.io/v1
 kind: TestSource
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
   name: testsource-tks-automated-tests
   namespace: tks-system
 spec:

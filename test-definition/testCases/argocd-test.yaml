@@ -1,6 +1,8 @@
 apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: Sync
   name: test-argo-cd
   namespace: tks-system
   labels:
