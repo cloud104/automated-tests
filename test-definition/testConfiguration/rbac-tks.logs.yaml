@@ -9,14 +9,14 @@ kind: ClusterRoleBinding
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"    
-  name: test-thanos-clusterrolebinding-testkube-job
+  name: test-tks-logs-clusterrolebinding-testkube-job
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: test-thanos-clusterrole-testkube-job
+  name: test-tks-logs-clusterrole-testkube-job
 subjects:
   - kind: ServiceAccount
-    name: test-thanos-testkube-job
+    name: test-tks-logs-testkube-job
     namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -24,7 +24,7 @@ kind: ClusterRole
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"    
-  name: test-thanos-clusterrole-testkube-job
+  name: test-tks-logs-clusterrole-testkube-job
 rules:
  - apiGroups:
      - batch
