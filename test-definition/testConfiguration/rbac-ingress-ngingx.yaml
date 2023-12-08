@@ -3,43 +3,66 @@ kind: ServiceAccount
 metadata:
   name: test-ingress-nginx-testkube-job
   namespace: tks-system
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRoleBinding
-#metadata:
-#  name: test-ingress-nginx-clusterrolebinding-testkube-job
-#roleRef:
-#  apiGroup: rbac.authorization.k8s.io
-#  kind: ClusterRole
-#  name: test-ingress-nginx-clusterrole-testkube-job
-#subjects:
-#  - kind: ServiceAccount
-#    name: test-ingress-nginx-testkube-job
-#    namespace: tks-system
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: ClusterRole
-#metadata:
-#  name: ttest-ingress-nginx-clusterrole-testkube-job
-#rules:
-#  - apiGroups:
-#      - batch
-#    resources:
-#      - jobs
-#    verbs:
-#      - get
-#      - watch
-#      - list
-#      - create
-#      - delete
-#  - apiGroups:
-#      - ""
-#    resources:
-#      - pods
-#      - pods/log
-#    verbs:
-#      - get
-#      - watch
-#      - list
-#      - create
-#      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  argocd.argoproj.io/sync-wave: "-1"    
+  name: test-ingress-nginx-clusterrolebinding-testkube-job
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: test-ingress-nginx-clusterrole-testkube-job
+subjects:
+  - kind: ServiceAccount
+    name: test-ingress-nginx-testkube-job
+    namespace: tks-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  argocd.argoproj.io/sync-wave: "-1"    
+  name: test-ingress-nginx-clusterrole-testkube-job
+rules:
+ - apiGroups:
+     - batch
+   resources:
+     - jobs
+   verbs:
+     - get
+     - watch
+     - list
+     - create
+     - delete
+ - apiGroups:
+     - ""
+   resources:
+     - pods
+     - pods/log
+   verbs:
+     - get
+     - watch
+     - list
+     - create
+     - delete
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests
+   verbs:
+   - create
+   - delete
+   - get
+   - list
+   - patch
+   - update
+   - watch
+   - deletecollection
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests/status
+   verbs:
+   - get
+   - patch
+   - update

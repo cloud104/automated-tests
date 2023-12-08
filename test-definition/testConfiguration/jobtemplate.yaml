@@ -1,7 +1,9 @@
 apiVersion: tests.testkube.io/v1
 kind: Template
 metadata:
-  name: job-template-worker-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"    
+  name: job-template-worker-system  
   namespace: tks-system
 spec:
   type: job
