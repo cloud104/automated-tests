@@ -3,3 +3,66 @@ kind: ServiceAccount
 metadata:
   name: test-cluster-autoscaler-testkube-job
   namespace: tks-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  argocd.argoproj.io/sync-wave: "-1"    
+  name: test-cluster-autoscaler-clusterrolebinding-testkube-job
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: test-cluster-autoscaler-clusterrole-testkube-job
+subjects:
+  - kind: ServiceAccount
+    name: test-cluster-autoscaler-testkube-job
+    namespace: tks-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  argocd.argoproj.io/sync-wave: "-1"    
+  name: test-cluster-autoscaler-clusterrole-testkube-job
+rules:
+ - apiGroups:
+     - batch
+   resources:
+     - jobs
+   verbs:
+     - get
+     - watch
+     - list
+     - create
+     - delete
+ - apiGroups:
+     - ""
+   resources:
+     - pods
+     - pods/log
+   verbs:
+     - get
+     - watch
+     - list
+     - create
+     - delete
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests
+   verbs:
+   - create
+   - delete
+   - get
+   - list
+   - patch
+   - update
+   - watch
+   - deletecollection
+ - apiGroups:
+   - tests.testkube.io
+   resources:
+   - tests/status
+   verbs:
+   - get
+   - patch
+   - update

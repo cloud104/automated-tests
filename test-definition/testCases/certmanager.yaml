@@ -1,6 +1,8 @@
 apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"   
   name: test-certmanager
   namespace: tks-system
   labels:
