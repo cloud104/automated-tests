@@ -13,7 +13,7 @@ spec:
   type: postman/collection
   content:
     repository:
-      branch: master
+      branch: feat/argo-cd-testkube-app
       path: executors/postman/argocd/argocd.json
   source: testsource-tks-automated-tests
   executionRequest:
