@@ -43,11 +43,15 @@ Node-exporter:
 - http://prometheus-tks-prometheus.tks-system.svc.cluster.local:9090/api/v1/targets/metadata?match_target={job="node-exporter"}&metric=promhttp_metric_handler_requests_total
 
 
-## Variables:
+## Environment Variables
 
-- GRAFANA_USER (--secret-variable)
-- GRAFANA_PASS (--secret-variable)
-- GRAFANA_DATASOURCE (--variable)
+The following variable is required to run the test on the application:
+
+| Variable     | Description                                            |
+|--------------|--------------------------------------------------------|
+| GRAFANA_USER  | Specifies the username for login on Grafana Api.      |
+| GRAFANA_PASS  | Specifies the password for login on Grafana Api.      |
+| GRAFANA_DATASOURCE | Specifies the Datasource validate on Grafana Api.|
 
 
 ## Create Test:

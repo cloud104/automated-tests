@@ -16,10 +16,15 @@
 - ElasticSearch: https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health/ (requires authentication)
 - Kibana: http://tks-logs-kb-http.tks-logs.svc.cluster.local:5601/api/stats (requires authentication)
 
-## Variables:
 
-- TKSLOGS_USER (--sercret-variable)
-- TKSLOGS_PASS (--sercret-variable)
+## Environment Variables
+
+The following variable is required to run the test on the application:
+
+| Variable     | Description                                      |
+|--------------|--------------------------------------------------|
+| TKSLOGS_USER | Specifies the username of login on ElasticSearch and Kibana APIs.|
+| TKSLOGS_PASS | Specifies the credencial of user admin on ElasticSearch and Kibana APIs.
 
 
 ## Create Test:
