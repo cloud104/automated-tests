@@ -21,7 +21,7 @@ The following variable is required to run the test on the application:
 | Variable     | Description                                                      |
 |--------------|------------------------------------------------------------------|
 | API_ADDRESS  | Specify the cluster API address.                                 |
-| SERVICE_ACCOUNT_TOKEN | Specify the service account token used to query the api.|
+| SERVICE_ACCOUNT_TOKEN | Specify the service account token used to query on api. |
 
 
 ## Create Test:
