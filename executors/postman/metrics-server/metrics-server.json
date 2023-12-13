@@ -7,17 +7,34 @@
 	},
 	"item": [
 		{
-			"name": "New Request",
+			"name": "Check Metrics-server API is available",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"setTimeout(() => {}, 15000000); ",
-							"",
 							"pm.test(\"Response status code is 200\", function () {",
 							"  pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"pm.test(\"Check if Metrics-Server API is available\", function () {",
+							"const jsonData = JSON.parse(responseBody);",
+							"jsonData.status.conditions.forEach(function (item) {",
+							"pm.expect(item.type).to.eql(\"Available\", `Metrics-server API type is ${item.type}`);",
+							"pm.expect(item.status).to.eql(\"True\", `Metrics-server API status is ${item.status}`);    ",
+							"})",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -29,23 +46,68 @@
 				"disableUrlEncoding": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{SERVICE_ACCOUNT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"url": {
-					"raw": "https://metrics-server.tks-system.svc.cluster.local/apis/metrics.k8s.io/v1beta1/nodes",
+					"raw": "https://{{API_ADDRESS}}/apis/apiregistration.k8s.io/v1/apiservices/v1beta1.metrics.k8s.io",
 					"protocol": "https",
 					"host": [
-						"metrics-server",
-						"tks-system",
-						"svc",
-						"cluster",
-						"local"
+						"{{API_ADDRESS}}"
+					],
+					"path": [
+						"apis",
+						"apiregistration.k8s.io",
+						"v1",
+						"apiservices",
+						"v1beta1.metrics.k8s.io"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Node Metrics API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{SERVICE_ACCOUNT_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{API_ADDRESS}}/apis/metrics.k8s.io/v1beta1/nodes",
+					"protocol": "https",
+					"host": [
+						"{{API_ADDRESS}}"
 					],
 					"path": [
 						"apis",
@@ -76,6 +138,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_ADDRESS",
+			"value": ""
+		},
+		{
+			"key": "SERVICE_ACCOUNT_TOKEN",
+			"value": ""
 		}
 	]
 }
