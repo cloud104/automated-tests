@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "fbc95f85-296d-493d-9d9f-18f0e537b4b4",
+		"name": "Dex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30057446"
+	},
+	"item": [
+		{
+			"name": "Dex health check endpoint - Live",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Dex health check endpoint\", function () {",
+							"pm.response.to.have.body(\"ok\")",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dex.tks-system.svc.cluster.local:5558/healthz/live",
+					"protocol": "http",
+					"host": [
+						"dex",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "5558",
+					"path": [
+						"healthz",
+						"live"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dex health check endpoint - Ready",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dex.tks-system.svc.cluster.local:5558/healthz/ready",
+					"protocol": "http",
+					"host": [
+						"dex",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "5558",
+					"path": [
+						"healthz",
+						"ready"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tks-login health check endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://tks-login.tks-system.svc.cluster.local:5555/healthz",
+					"protocol": "http",
+					"host": [
+						"tks-login",
+						"tks-system",
+						"svc",
+						"cluster",
+						"local"
+					],
+					"port": "5555",
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
