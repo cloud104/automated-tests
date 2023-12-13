@@ -18,9 +18,13 @@
 - http://argo-cd-argocd-server.tks-system.svc.cluster.local/api/v1/applications? (requires authentication)
 
 
-## Variables:
+## Environment Variables
 
-- ARGOCD_PASS (--secret-variable)
+The following variable is required to run the test on the application:
+
+| Variable     | Description                                      |
+|--------------|--------------------------------------------------|
+| ARGOCD_PASS  | Specifies the credencial of user admin on argocd.|
 
 
 ## Create Test:
