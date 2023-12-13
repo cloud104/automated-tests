@@ -4,7 +4,7 @@
 
 ## Verifications:
 
-- Checks if the health endpoints is as expected. (Expected: "OK")
+- Checks if the health endpoints is as expected. (Expected: "OK" | "200")
 
 ## Endpoints:
 
