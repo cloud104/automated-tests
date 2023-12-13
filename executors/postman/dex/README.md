@@ -16,7 +16,7 @@
 ## Create Test:
 
 ```
-kubectl testkube create test --name dex--type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/dex/dex.json
+kubectl testkube create test --name dex --type postman/collection --test-content-type git-file --git-uri https://github.com/cloud104/automated-tests.git --git-branch master --git-path executors/postman/dex/dex.json
 ```
 
 ## Run Test:
