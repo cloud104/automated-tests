@@ -42,7 +42,7 @@ To run the Crossplane tests using TestKube, follow the steps below:
       --git-uri "https://github.com/cloud104/automated-tests" \
       --git-branch "feature/crossplane-testing" \
       --git-path "executors/ginkgo/crossplane" \
-      --namespace "testkube"
+      --namespace "tks-system"
     ```
 
 2. **Run the Test:**
