@@ -16,7 +16,7 @@ roleRef:
   name: test-cert-manager-clusterrole-testkube-job
 subjects:
   - kind: ServiceAccount
-    name: test-certmanager-testkube-job
+    name: test-cert-manager-testkube-job
     namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
