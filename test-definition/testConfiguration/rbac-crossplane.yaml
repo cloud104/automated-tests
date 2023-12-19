@@ -46,6 +46,7 @@ rules:
       - kubernetes.crossplane.io
     resources:
       - objectconfigs
+      - providerconfigs
     verbs: [ "*" ]
   - apiGroups:
       - ""
