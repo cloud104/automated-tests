@@ -90,6 +90,11 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"disabledSystemHeaders": {},
+				"disableUrlEncoding": true
+			},
 			"request": {
 				"auth": {
 					"type": "bearer",
