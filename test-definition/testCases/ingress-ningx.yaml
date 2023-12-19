@@ -12,7 +12,7 @@ spec:
   type: ginkgo/test
   content:
     repository:
-      branch: master
+      branch: fix/test-cases
       path: executors/ginkgo/ingress-nginx
   source: testsource-tks-automated-tests
   executionRequest:
