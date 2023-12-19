@@ -46,3 +46,8 @@ rules:
     resources:
       - objectconfigs
     verbs: [ "*" ]
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs: [ "get","list","delete","create","watch","update" ]
