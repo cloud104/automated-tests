@@ -50,4 +50,5 @@ rules:
       - ""
     resources:
       - namespaces
+      - serviceaccounts
     verbs: [ "get","list","delete","create","watch","update" ]
