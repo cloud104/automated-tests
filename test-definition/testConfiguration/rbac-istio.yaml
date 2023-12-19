@@ -7,7 +7,8 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  argocd.argoproj.io/sync-wave: "-1"    
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"    
   name: test-istio-clusterrolebinding-testkube-job
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -21,48 +22,13 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  argocd.argoproj.io/sync-wave: "-1"    
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"    
   name: test-istio-clusterrole-testkube-job
 rules:
- - apiGroups:
-     - batch
-   resources:
-     - jobs
-   verbs:
-     - get
-     - watch
-     - list
-     - create
-     - delete
- - apiGroups:
-     - ""
-   resources:
-     - pods
-     - pods/log
-   verbs:
-     - get
-     - watch
-     - list
-     - create
-     - delete
- - apiGroups:
-   - tests.testkube.io
-   resources:
-   - tests
-   verbs:
-   - create
-   - delete
-   - get
-   - list
-   - patch
-   - update
-   - watch
-   - deletecollection
- - apiGroups:
-   - tests.testkube.io
-   resources:
-   - tests/status
-   verbs:
-   - get
-   - patch
-   - update
+  - apiGroups: [ "install.istio.io" ]
+    resources: [ "istiooperators" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "apps" ]
+    resources: [ "deployments" ]
+    verbs: [ "get", "list", "watch" ]
