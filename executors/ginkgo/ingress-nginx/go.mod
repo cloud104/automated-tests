@@ -4,7 +4,7 @@ go 1.21.2
 
 require (
 	github.com/hashicorp/go-multierror v1.1.1
-	github.com/onsi/ginkgo/v2 v2.13.2
+	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.27.10
 	github.com/totvs-cloud/go-manifest v1.0.0
 	k8s.io/client-go v0.28.3
