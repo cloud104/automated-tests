@@ -4,7 +4,7 @@ metadata:
   labels:
     app: testkube
   name: testkube-test-deployment
-  namespace: testkube
+  namespace: tks-system
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ metadata:
   labels:
     app: testkube
   name: testkube-test-svc
-  namespace: testkube
+  namespace: tks-system
 spec:
   ports:
   - port: 80
@@ -39,7 +39,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: testkube-test-ingress
-  namespace: testkube
+  namespace: tks-system
 spec:
   rules:
   - host: check-ingress.CLUSTERID.REGIONDNS
