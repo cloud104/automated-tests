@@ -1,0 +1,20 @@
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"   
+  name: test-cert-manager
+  namespace: tks-system
+  labels:
+    executor: ginkgo-executor
+    test-type: ginkgo-test
+spec:
+  type: ginkgo/test
+  content:
+    repository:
+      branch: master
+      path: executors/ginkgo/certmanager
+  source: testsource-tks-automated-tests
+  executionRequest:
+    jobTemplateReference: job-template-worker-system
+    executePostRunScriptBeforeScraping: false
