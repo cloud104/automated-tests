@@ -50,6 +50,9 @@ rules:
     resources: [ "pods" ]
     verbs: [ "get", "list", "watch" ]
   - apiGroups: [ "metrics.k8s.io" ]
-    resources: [ "node" ]
+    resources: [ "nodes" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "apiregistration.k8s.io" ]
+    resources: [ "apiservices" ]
     verbs: [ "get", "list", "watch" ]
 
