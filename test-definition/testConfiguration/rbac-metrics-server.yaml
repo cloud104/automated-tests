@@ -4,6 +4,14 @@ metadata:
   name: test-metrics-server-testkube-job
   namespace: tks-system
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-metrics-server-testkube-job
+  annotations:
+    kubernetes.io/service-account.name: test-metrics-server-testkube-job
+type: kubernetes.io/service-account-token
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
