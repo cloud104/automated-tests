@@ -2,18 +2,18 @@ apiVersion: tests.testkube.io/v3
 kind: Test
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "1"   
-  name: test-certmanager
+    argocd.argoproj.io/sync-wave: "1"    
+  name: test-dex
   namespace: tks-system
   labels:
-    executor: ginkgo-executor
-    test-type: ginkgo-test
+    executor: postman-executor
+    test-type: postman-collection
 spec:
-  type: ginkgo/test
+  type: postman/collection
   content:
     repository:
       branch: master
-      path: executors/ginkgo/certmanager
+      path: executors/postman/dex/dex.json
   source: testsource-tks-automated-tests
   executionRequest:
     jobTemplateReference: job-template-worker-system
