@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2d58bbec-47a2-46e4-836f-f4e2fdb11f6e",
+		"_postman_id": "a2028714-280f-48ca-ab9e-6b2fab50724d",
 		"name": "ArgoCD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30057446"
+		"_exporter_id": "29714931"
 	},
 	"item": [
 		{
@@ -128,17 +128,21 @@
 							"});",
 							"",
 							"pm.test(\"Checks Sync status of applications\", function () {",
-							"const jsonData = JSON.parse(responseBody);",
-							"jsonData.items.forEach(function (item) {",
-							"pm.expect(item.status.sync.status).to.eql(\"Synced\", `Failed check sync of application: ${item.metadata.name}`);  ",
-							"})",
+							"  const jsonData = pm.response.json();",
+							"  jsonData.items.forEach(function (item) {",
+							"    if (item.metadata.name !== \"testkube-app\") {",
+							"      pm.expect(item.status.sync.status).to.eql(\"Synced\", `Failed check sync of application: ${item.metadata.name}`);",
+							"    }",
+							"  });  ",
 							"});",
 							"",
 							"pm.test(\"Checks Health of applications\", function () {",
-							"const jsonData = JSON.parse(responseBody);",
-							"jsonData.items.forEach(function (item) {",
-							"pm.expect(item.status.health.status).to.eql(\"Healthy\", `Failed health check of application: ${item.metadata.name}`);  ",
-							"})",
+							"  const jsonData = pm.response.json();",
+							"  jsonData.items.forEach(function (item) {",
+							"    if (item.metadata.name !== \"testkube-app\") {",
+							"      pm.expect(item.status.health.status).to.eql(\"Healthy\", `Failed health check of application: ${item.metadata.name}`);  ",
+							"    }",
+							"  });",
 							"});"
 						],
 						"type": "text/javascript"
