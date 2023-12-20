@@ -102,6 +102,9 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
 					"request": {
 						"auth": {
 							"type": "basic",
