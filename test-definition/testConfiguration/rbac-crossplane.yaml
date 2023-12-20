@@ -40,9 +40,18 @@ rules:
       - rbac.authorization.k8s.io
     resources:
       - roles
+      - rolebindings
     verbs: [ "*" ]
   - apiGroups:
       - kubernetes.crossplane.io
     resources:
       - objectconfigs
+      - providerconfigs
+      - objects
     verbs: [ "*" ]
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - serviceaccounts
+    verbs: [ "get","list","delete","create","watch","update" ]

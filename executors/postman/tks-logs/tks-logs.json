@@ -58,7 +58,7 @@
 							}
 						],
 						"url": {
-							"raw": "https://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health/",
+							"raw": "http://tks-logs-es-http.tks-logs.svc.cluster.local:9200/_cluster/health/",
 							"protocol": "https",
 							"host": [
 								"tks-logs-es-http",
@@ -102,6 +102,9 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"strictSSL": false
+					},
 					"request": {
 						"auth": {
 							"type": "basic",
