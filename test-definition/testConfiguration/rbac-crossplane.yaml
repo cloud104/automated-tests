@@ -47,6 +47,7 @@ rules:
     resources:
       - objectconfigs
       - providerconfigs
+      - objects
     verbs: [ "*" ]
   - apiGroups:
       - ""
