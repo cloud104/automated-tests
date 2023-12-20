@@ -13,7 +13,7 @@ spec:
   content:
     repository:
       branch: master
-      path: executors/ginkgo/test-istio
+      path: executors/ginkgo/istio
   source: testsource-tks-automated-tests
   executionRequest:
     jobTemplateReference: job-template-worker-system
