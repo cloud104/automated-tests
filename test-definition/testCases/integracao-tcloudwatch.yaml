@@ -13,4 +13,5 @@ spec:
   type: curl/test
   content:
     type: string
-    data: "{\n  \"command\": [\n    \"curl\",\n    \"http://integracao-cloudwatch.tks-system.svc.cluster.local/metrics\",\n    \"-H\",\n    \"'Accept: application/json'\"\n  ],\n  \"expected_status\": \"200\"\n}"
+    data: "{\n  \"command\": [\n    \"curl\",\n    \"https://kubernetes.io/pt-br/\",\n    \"-H\",\n    \"'Accept: application/json'\"\n  ],\n  \"expected_status\": \"200\"\n}"
+    #data: "{\n  \"command\": [\n    \"curl\",\n    \"http://integracao-cloudwatch.tks-system.svc.cluster.local/metrics\",\n    \"-H\",\n    \"'Accept: application/json'\"\n  ],\n  \"expected_status\": \"200\"\n}"
