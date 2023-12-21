@@ -2,13 +2,13 @@ package ingress_nginx_test
 
 import (
 	"context"
+	"github.com/cloud104/automated-tests/executors/ginkgo/ingress-nginx/internal/config"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
 	"path"
 	"strings"
-	"time"
 
 	"github.com/hashicorp/go-multierror"
 	. "github.com/onsi/ginkgo/v2"
@@ -24,13 +24,22 @@ var (
 	region_dns = os.Getenv("REGION_DNS")
 )
 
+var test = struct {
+	Config *config.Test
+}{}
+
 var _ = BeforeSuite(func() {
-	config, err := loadRestConfig()
+	restConfig, err := loadRestConfig()
 	Expect(err).NotTo(HaveOccurred())
 
-	mr, err := manifest.NewReader("totvs-cloud", config)
+	mr, err := manifest.NewReader("totvs-cloud", restConfig)
 	Expect(err).NotTo(HaveOccurred())
 	manifests = mr
+
+	testConfig, err := config.NewTest()
+	Expect(err).NotTo(HaveOccurred())
+
+	test.Config = testConfig
 })
 
 var _ = AfterSuite(func() {
@@ -62,8 +71,6 @@ var _ = Describe("Application Test", func() {
 		err = m.Apply(context.Background())
 		Expect(err).NotTo(HaveOccurred())
 
-		time.Sleep(10 * time.Second)
-
 		GinkgoWriter.Println("Manifest applied successfully!")
 	})
 
@@ -72,12 +79,13 @@ var _ = Describe("Application Test", func() {
 		baseUrl, err := url.Parse("https://check-ingress." + cluster_id + "." + region_dns)
 		Expect(err).NotTo(HaveOccurred())
 
-		resp, requestErr := http.Get(baseUrl.String())
-
-		Expect(requestErr).To(BeNil())
-		Expect(resp.StatusCode).To(Equal(200))
-
 		GinkgoWriter.Println(baseUrl)
+		Eventually(func() int {
+			resp, requestErr := http.Get(baseUrl.String())
+			Expect(requestErr).NotTo(HaveOccurred())
+
+			return resp.StatusCode
+		}).WithTimeout(test.Config.Timeout).Should(Equal(200))
 	})
 })
 

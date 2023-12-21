@@ -3,6 +3,7 @@ module github.com/cloud104/automated-tests/executors/ginkgo/ingress-nginx
 go 1.21.2
 
 require (
+	github.com/caarlos0/env/v10 v10.0.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/onsi/ginkgo/v2 v2.13.0
 	github.com/onsi/gomega v1.27.10
