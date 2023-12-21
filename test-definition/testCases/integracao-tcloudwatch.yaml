@@ -1,0 +1,16 @@
+
+apiVersion: tests.testkube.io/v3
+kind: Test
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"    
+  name: test-integracao-cloudwatch
+  namespace: tks-system
+  labels:
+    executor: curl-executor
+    test-type: curl-test
+spec:
+  type: curl/test
+  content:
+    type: string
+    data: "{\n  \"command\": [\n    \"curl\",\n    \"http://integracao-cloudwatch.tks-system.svc.cluster.local/metrics\",\n    \"-H\",\n    \"'Accept: application/json'\"\n  ],\n  \"expected_status\": \"200\"\n}"
