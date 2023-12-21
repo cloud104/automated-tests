@@ -3,17 +3,17 @@ kind: Test
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"   
-  name: test-istio
+  name: test-prometheus-stackdriver-exporter
   namespace: tks-system
   labels:
-    executor: ginkgo-executor
-    test-type: ginkgo-test
+    executor: postman-executor
+    test-type: postman-collection
 spec:
-  type: ginkgo/test
+  type: postman/collection
   content:
     repository:
       branch: master
-      path: executors/ginkgo/istio
+      path: executors/postman/prometheus-stackdriver-exporter/prometheus-stackdriver-exporter.json
   source: testsource-tks-automated-tests
   executionRequest:
     jobTemplateReference: job-template-worker-system
