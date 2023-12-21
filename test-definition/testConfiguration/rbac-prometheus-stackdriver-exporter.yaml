@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: test-spot-price-calculator-testkube-job
+  name: test-prometheus-stackdriver-exporter-testkube-job
   namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -9,14 +9,14 @@ kind: ClusterRoleBinding
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: test-spot-price-calculator-clusterrolebinding-testkube-job
+  name: test-prometheus-stackdriver-exporter-clusterrolebinding-testkube-job
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: test-spot-price-calculator-clusterrole-testkube-job
+  name: test-prometheus-stackdriver-exporter-clusterrole-testkube-job
 subjects:
   - kind: ServiceAccount
-    name: test-spot-price-calculator-testkube-job
+    name: test-prometheus-stackdriver-exporter-testkube-job
     namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -24,7 +24,7 @@ kind: ClusterRole
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: test-spot-price-calculator-clusterrole-testkube-job
+  name: test-prometheus-stackdriver-exporter-clusterrole-testkube-job
 rules:
   - apiGroups:
       - batch
@@ -68,4 +68,3 @@ rules:
       - get
       - patch
       - update
-

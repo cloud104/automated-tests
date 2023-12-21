@@ -16,7 +16,7 @@ roleRef:
   name: test-istio-clusterrole-testkube-job
 subjects:
   - kind: ServiceAccount
-    name: test-ingress-nginx-testkube-job
+    name: test-istio-testkube-job
     namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
