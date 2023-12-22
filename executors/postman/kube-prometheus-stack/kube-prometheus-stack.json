@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e82bc43d-bbb4-468d-8c52-50e1dc712029",
+		"_postman_id": "e92a3d78-4ac3-4257-ae89-ce10c762f157",
 		"name": "Kube-Prometheus-Stack",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30057446"
+		"_exporter_id": "29714931"
 	},
 	"item": [
 		{
@@ -20,12 +20,14 @@
 									"  pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"Default datasource check\", function () {",
-									" const responseJson =  pm.response.json();",
-									" const [firstDatasource] = responseJson.filter(function(obj){",
-									"   return obj.isDefault",
-									" })",
-									" pm.expect(firstDatasource.name).to.eql(pm.environment.get(\"GRAFANA_DATASOURCE\"));",
+									"pm.test('Default datasource check', function () {",
+									"    const jsonData = pm.response.json();",
+									"    const DataSourceName = pm.variables.get('GRAFANA_DATASOURCE');",
+									"    jsonData.forEach(function (datasource) {",
+									"        if (datasource.name == pm.variables.get('GRAFANA_DATASOURCE')) {",
+									"            pm.expect(datasource.isDefault).to.eql(true, `Failed check Default datasource : ${ datasource.name }`);",
+									"        }",
+									"    });",
 									"});"
 								],
 								"type": "text/javascript"

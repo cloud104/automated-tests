@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: test-prometheus-pushgateway-testkube-job
+  name: test-integracao-cloudwatch-testkube-job
   namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -9,14 +9,14 @@ kind: ClusterRoleBinding
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: test-prometheus-pushgateway-clusterrolebinding-testkube-job
+  name: test-integracao-cloudwatch-clusterrolebinding-testkube-job
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: test-prometheus-pushgateway-clusterrole-testkube-job
+  name: test-integracao-cloudwatch-clusterrole-testkube-job
 subjects:
   - kind: ServiceAccount
-    name: test-prometheus-push-gateway-testkube-job
+    name: test-integracao-cloudwatch-testkube-job
     namespace: tks-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -24,7 +24,7 @@ kind: ClusterRole
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: test-prometheus-pushgateway-clusterrole-testkube-job
+  name: test-integracao-cloudwatch-clusterrole-testkube-job
 rules:
   - apiGroups:
       - batch
