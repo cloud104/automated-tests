@@ -12,8 +12,8 @@ steps:
   args: ['buildx', 'inspect', '--bootstrap']
   id: 'show-target-build-platforms'
 - name: "gcr.io/cloud-builders/docker"
-  args: ["buildx", "build", "-t", "testkube-executor-ginkgo:$TAG_NAME", "-f", "testkube-executor-ginkgo/build/agent/Dockerfile"]
+  args: ["build", "-t", "testkube-executor-ginkgo:$TAG_NAME", "-f", "testkube-executor-ginkgo/build/agent/Dockerfile"]
   id: 'build'
 - name: "gcr.io/cloud-builders/docker"
-  args: ["buildx", "build", "--push", "--platform","linux/arm64,linux/amd64", "-t", "testkube-executor-ginkgo:$TAG_NAME"]
+  args: ["push", "testkube-executor-ginkgo:$TAG_NAME"]
   id: 'push'  
