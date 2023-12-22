@@ -30,7 +30,7 @@ rules:
     resources: [ "vaults" ]
     verbs: [ "*" ]
   - apiGroups: [ "" ]
-    resources: [ "serviceaccounts" ]
+    resources: [ "serviceaccounts", "namespaces" ]
     verbs: [ "*" ]
   - apiGroups: [ "rbac.authorization.k8s.io" ]
     resources: [ "roles", "rolebindings" ]
