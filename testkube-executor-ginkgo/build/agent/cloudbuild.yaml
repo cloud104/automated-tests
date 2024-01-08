@@ -1,7 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/tks-gcr-pub/testkube-executor-ginkgo:$TAG_NAME', '-f','./testkube-executor-ginkgo/build/agent/Dockerfile', '.']
+  args: ['build', '-t', 'us-east1-docker.pkg.dev/tks-gcr-pub/testkube-executor-ginkgo:$TAG_NAME', '-f','./testkube-executor-ginkgo/build/agent/Dockerfile', '.']
   id: 'build'
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/tks-gcr-pub/testkube-executor-ginkgo:$TAG_NAME']
+  args: ['push', 'us-east1-docker.pkg.dev/tks-gcr-pub/testkube-executor-ginkgo:$TAG_NAME']
   id: 'push'  
