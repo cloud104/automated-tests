@@ -5,7 +5,7 @@ COPY . .
 ENV CGO_ENABLED=0
 ENV GOOS=linux
 
-RUN cd cmd/agent;go build -o /runner -mod mod -a .
+RUN cd testkube-executor-ginkgo/cmd/agent;go build -o /runner -mod mod -a .
 RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo@v2.13.2
 RUN cp `which ginkgo` ginkgo
 
